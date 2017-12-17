@@ -47,7 +47,7 @@ public class ZarinTextView extends android.support.v7.widget.AppCompatTextView {
             this.fontFace = array.getInt(R.styleable.ZarinTextView_zp_fontFace, IRANSANS_LIGHT);
             this.textFormat = array.getInt(R.styleable.ZarinTextView_zp_textFormat, IRANSANS_LIGHT);
             this.activeLongPressCopyText = array.getBoolean(
-                    R.styleable.ZarinTextView_zp_activeLongPressCopyText, false);
+                    R.styleable.ZarinTextView_zp_longCopy, false);
         } finally {
             array.recycle();
         }
@@ -61,7 +61,7 @@ public class ZarinTextView extends android.support.v7.widget.AppCompatTextView {
     }
 
     private void initialize() {
-        this.changeFontFace();
+        this.setFontFace();
 
         // Set text of textView Again for formatting text
         // Todo: Fix later
@@ -75,7 +75,7 @@ public class ZarinTextView extends android.support.v7.widget.AppCompatTextView {
     /**
      * Change font
      */
-    private void changeFontFace() {
+    private void setFontFace() {
         String fontFamily = FontUtility.IRANSANS_LIGHT;
 
         switch (fontFace) {

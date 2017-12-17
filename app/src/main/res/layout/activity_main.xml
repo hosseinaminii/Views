@@ -18,4 +18,15 @@
         android:textSize="30dp"
         android:text="1000"/>
 
+    <com.zarinpal.libs.views.ZarinButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:zp_cornerRadius="40"
+        app:zp_firstColor="@color/colorAccent"
+        app:zp_secondColor="@color/colorPrimary"
+        app:zp_fontFace="iransans_bold"
+        app:zp_rippleColor="#ff0"
+        android:padding="40dp"
+        android:text="This Button"/>
+
 </LinearLayout>

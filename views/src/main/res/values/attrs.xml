@@ -16,10 +16,19 @@
     </attr>
 
 
-
     <declare-styleable name="ZarinTextView">
         <attr name="zp_fontFace" />
         <attr name="zp_textFormat" />
-        <attr name="zp_activeLongPressCopyText" format="boolean" />
+        <attr name="zp_longCopy" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="ZarinButton">
+        <attr name="android:padding" />
+        <attr name="zp_fontFace" />
+        <attr name="zp_rippleColor" format="color"/>
+        <attr name="zp_firstColor" format="color"/>
+        <attr name="zp_secondColor" format="color"/>
+        <attr name="zp_cornerRadius" format="integer"/>
+    </declare-styleable>
+
 </resources>
