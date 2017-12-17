@@ -2,5 +2,6 @@
 <resources>
     <color name="button_ripple">#64000000</color>
     <color name="button_default">#2ecc71</color>
+    <color name="button_press">#31000000</color>
 
 </resources>

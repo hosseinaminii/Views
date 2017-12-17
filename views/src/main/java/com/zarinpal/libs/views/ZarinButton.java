@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -33,7 +35,7 @@ public class ZarinButton extends android.support.v7.widget.AppCompatButton {
 
     private int padding;
     private int fontFace;
-    private int rippleColor, firstColor, secondColor;
+    private int rippleColor, firstColor, secondColor, pressColor;
     private int cornerRadius;
 
     public ZarinButton(Context context) {
@@ -56,6 +58,7 @@ public class ZarinButton extends android.support.v7.widget.AppCompatButton {
                     ContextCompat.getColor(context, R.color.button_default));
             this.secondColor = array.getColor(R.styleable.ZarinButton_zp_secondColor,
                     ContextCompat.getColor(context, R.color.button_default));
+            this.pressColor = array.getColor(R.styleable.ZarinButton_zp_pressColor, 0);
             this.cornerRadius = array.getInt(R.styleable.ZarinButton_zp_cornerRadius, 7);
         } finally {
             array.recycle();
@@ -106,19 +109,20 @@ public class ZarinButton extends android.support.v7.widget.AppCompatButton {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setRippleBackground();
+            return;
         }
 
+        setBackground();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void setRippleBackground() {
-        ColorStateList colors = new ColorStateList(
-                new int[][]{new int[]{}}, new int[]{this.rippleColor}
-        );
+        ColorStateList colors = new ColorStateList(new int[][]{new int[]{}},
+                new int[]{this.rippleColor});
 
-        GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+        GradientDrawable defaultBg = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
                 new int[]{this.firstColor, this.secondColor});
-        gradientDrawable.setCornerRadius(this.cornerRadius);
+        defaultBg.setCornerRadius(this.cornerRadius);
 
         float[] outerRadii = new float[8];
         Arrays.fill(outerRadii, this.cornerRadius);
@@ -126,9 +130,27 @@ public class ZarinButton extends android.support.v7.widget.AppCompatButton {
         ShapeDrawable  mask           = new ShapeDrawable(roundRectShape);
 
         RippleDrawable rippleDrawable =
-                new RippleDrawable(colors, gradientDrawable, mask);
+                new RippleDrawable(colors, defaultBg, mask);
 
         setBackground(rippleDrawable);
+    }
+
+    private void setBackground() {
+        this.pressColor = this.pressColor == 0 ? this.firstColor : this.pressColor;
+        StateListDrawable stateListDrawable = new StateListDrawable();
+        GradientDrawable defaultBg =
+                new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{this.firstColor, this.secondColor});
+        GradientDrawable pressBg =
+                new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                        new int[]{this.pressColor, pressColor});
+        defaultBg.setCornerRadius(this.cornerRadius);
+        pressBg.setCornerRadius(this.cornerRadius);
+
+        stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, pressBg);
+        stateListDrawable.addState(new int[]{}, defaultBg);
+
+        setBackground(stateListDrawable);
     }
 
 

@@ -27,6 +27,7 @@
         app:zp_fontFace="iransans_bold"
         app:zp_rippleColor="#ff0"
         android:padding="40dp"
+        app:zp_pressColor="#0f0"
         android:text="This Button"/>
 
 </LinearLayout>
