@@ -16,6 +16,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 
+import com.zarinpal.libs.views.utitlity.ColorUtility;
 import com.zarinpal.libs.views.utitlity.FontUtility;
 
 import java.util.Arrays;
@@ -136,7 +137,10 @@ public class ZarinButton extends android.support.v7.widget.AppCompatButton {
     }
 
     private void setBackground() {
-        this.pressColor = this.pressColor == 0 ? this.firstColor : this.pressColor;
+//        int color = Color.parseColor("#fff");
+//        color.
+     //   this.pressColor = this.pressColor == 0 ? this.firstColor : this.pressColor;
+        this.pressColor = ColorUtility.darker(this.firstColor, .9f);
         StateListDrawable stateListDrawable = new StateListDrawable();
         GradientDrawable defaultBg =
                 new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
