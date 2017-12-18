@@ -18,11 +18,6 @@ import com.zarinpal.libs.views.utitlity.TextUtility;
 
 public class ZarinTextView extends android.support.v7.widget.AppCompatTextView {
 
-    private static final int IRANSANS_LIGHT  = 0;
-    private static final int IRANSANS_ULIGHT = 1;
-    private static final int IRANSANS_BOLD   = 2;
-    private static final int OCRA            = 3;
-
     private static final int FORMAT_NORMAL      = 0;
     private static final int FORMAT_PAN         = 1;
     private static final int FORMAT_CURRENCY    = 2;
@@ -44,8 +39,9 @@ public class ZarinTextView extends android.support.v7.widget.AppCompatTextView {
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.ZarinTextView);
         try {
-            this.fontFace = array.getInt(R.styleable.ZarinTextView_zp_fontFace, IRANSANS_LIGHT);
-            this.textFormat = array.getInt(R.styleable.ZarinTextView_zp_textFormat, IRANSANS_LIGHT);
+            this.fontFace = array.getInt(R.styleable.ZarinTextView_zp_fontFace,
+                    FontUtility.INDEX_IRANSANS_LIGHT);
+            this.textFormat = array.getInt(R.styleable.ZarinTextView_zp_textFormat, FORMAT_NORMAL);
             this.activeLongPressCopyText = array.getBoolean(
                     R.styleable.ZarinTextView_zp_longCopy, false);
         } finally {
@@ -79,15 +75,15 @@ public class ZarinTextView extends android.support.v7.widget.AppCompatTextView {
         String fontFamily = FontUtility.IRANSANS_LIGHT;
 
         switch (fontFace) {
-            case IRANSANS_ULIGHT: {
+            case FontUtility.INDEX_IRANSANS_ULIGHT: {
                 fontFamily = FontUtility.IRANSANS_ULIGHT;
                 break;
             }
-            case IRANSANS_BOLD: {
+            case FontUtility.INDEX_IRANSANS_BOLD: {
                 fontFamily = FontUtility.IRANSANS_BOLD;
                 break;
             }
-            case OCRA: {
+            case FontUtility.INDEX_OCRA: {
                 fontFamily = FontUtility.OCRA;
                 break;
             }

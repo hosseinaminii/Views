@@ -29,11 +29,6 @@ import java.util.Arrays;
 
 public class ZarinButton extends android.support.v7.widget.AppCompatButton {
 
-    private static final int IRANSANS_LIGHT  = 0;
-    private static final int IRANSANS_ULIGHT = 1;
-    private static final int IRANSANS_BOLD   = 2;
-    private static final int OCRA            = 3;
-
     private int padding;
     private int fontFace;
     private int rippleColor, firstColor, secondColor, pressColor;
@@ -52,7 +47,8 @@ public class ZarinButton extends android.support.v7.widget.AppCompatButton {
         try {
             this.padding = array.getDimensionPixelSize(R.styleable.ZarinButton_android_padding,
                     20);
-            this.fontFace = array.getInt(R.styleable.ZarinButton_zp_fontFace, IRANSANS_LIGHT);
+            this.fontFace = array.getInt(R.styleable.ZarinButton_zp_fontFace,
+                    FontUtility.INDEX_IRANSANS_LIGHT);
             this.rippleColor = array.getColor(R.styleable.ZarinButton_zp_rippleColor,
                     ContextCompat.getColor(context, R.color.button_ripple));
             this.firstColor = array.getColor(R.styleable.ZarinButton_zp_firstColor,
@@ -88,15 +84,15 @@ public class ZarinButton extends android.support.v7.widget.AppCompatButton {
         String fontFamily = FontUtility.IRANSANS_LIGHT;
 
         switch (fontFace) {
-            case IRANSANS_ULIGHT: {
+            case FontUtility.INDEX_IRANSANS_ULIGHT: {
                 fontFamily = FontUtility.IRANSANS_ULIGHT;
                 break;
             }
-            case IRANSANS_BOLD: {
+            case FontUtility.INDEX_IRANSANS_BOLD: {
                 fontFamily = FontUtility.IRANSANS_BOLD;
                 break;
             }
-            case OCRA: {
+            case FontUtility.INDEX_OCRA: {
                 fontFamily = FontUtility.OCRA;
                 break;
             }

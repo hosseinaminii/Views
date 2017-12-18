@@ -32,4 +32,11 @@
         <attr name="zp_pressColor" format="color"/>
     </declare-styleable>
 
+    <declare-styleable name="ZarinEditText">
+        <attr name="zp_fontFace"/>
+        <attr name="zp_firstLeftIcon" format="reference"/>
+        <attr name="zp_secondLeftIcon" format="reference"/>
+        <attr name="zp_rightIcon" format="reference"/>
+    </declare-styleable>
+
 </resources>
