@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     compileSdkVersion 26
@@ -24,11 +26,62 @@ android {
 
 }
 
+group = 'com.zarinpal'
+version = '0.0.1'
+
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+
+task generateJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath()
+            .join(File.pathSeparator))
+}
+
+task generateJavadocsJar(type: Jar) {
+    from generateJavadocs.destinationDir
+    classifier 'javadoc'
+}
+
+generateJavadocsJar.dependsOn generateJavadocs
+
+artifacts {
+    archives generateJavadocsJar
+    archives generateSourcesJar
+}
+
+bintray {
+    user = 'hosseinamiinii'
+    key = '9375f6367a55aeafdc33559f3443fcbbf08e24d6'
+    pkg {
+
+        repo = 'lib'
+        name = 'ZarinViews'
+        userOrg = 'zarinpali'
+
+        version {
+            name = '0.0.1'
+            desc = 'Zarinpal Custom BottomSheet'
+            released = new Date()
+            vcsTag = '0.0.1'
+        }
+
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/hossein-amini/bottom-sheet'
+        websiteUrl = 'https://www.zarinpal.com/'
+    }
+    configurations = ['archives']
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
     testImplementation 'junit:junit:4.12'
+    compile 'me.zhanghai.android.materialedittext:library:1.0.5'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }

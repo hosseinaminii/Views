@@ -28,6 +28,24 @@
         app:zp_rippleColor="#ff0"
         android:padding="40dp"
         app:zp_pressColor="#0f0"
+        android:layout_marginBottom="20dp"
         android:text="This Button"/>
+
+    <com.zarinpal.libs.views.ZarinEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:zp_rightIcon="@drawable/card_icon"
+        app:zp_leftFirstIcon="@drawable/card_icon"
+        android:textSize="20dp"
+        android:hint="@string/app_name"
+        android:maxLength="10"
+        android:textColor="#f00"
+        android:textColorHint="#0f0"
+        app:zp_leftSecondIcon="@drawable/card_icon"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"/>
 
 </LinearLayout>

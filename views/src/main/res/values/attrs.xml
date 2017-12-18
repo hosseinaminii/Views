@@ -33,10 +33,24 @@
     </declare-styleable>
 
     <declare-styleable name="ZarinEditText">
+        <attr name="android:inputType"/>
+        <attr name="android:maxLength"/>
+        <attr name="android:textSize"/>
+        <attr name="android:hint"/>
+        <attr name="android:maxLines"/>
+        <attr name="android:gravity" />
+        <attr name="android:textColor" />
+        <attr name="android:text" />
+        <attr name="android:textColorHint" />
         <attr name="zp_fontFace"/>
-        <attr name="zp_firstLeftIcon" format="reference"/>
-        <attr name="zp_secondLeftIcon" format="reference"/>
-        <attr name="zp_rightIcon" format="reference"/>
+        <attr name="zp_leftFirstIcon" format="integer"/>
+        <attr name="zp_leftSecondIcon" format="integer"/>
+        <attr name="zp_rightIcon" format="integer"/>
+        <attr name="zp_textGravity" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
     </declare-styleable>
+
 
 </resources>
