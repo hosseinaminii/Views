@@ -137,10 +137,8 @@ public class ZarinButton extends android.support.v7.widget.AppCompatButton {
     }
 
     private void setBackground() {
-//        int color = Color.parseColor("#fff");
-//        color.
-     //   this.pressColor = this.pressColor == 0 ? this.firstColor : this.pressColor;
-        this.pressColor = ColorUtility.darker(this.firstColor, .9f);
+        this.pressColor = this.pressColor == 0 ? ColorUtility.darker(this.firstColor, .9f) :
+                this.pressColor ;
         StateListDrawable stateListDrawable = new StateListDrawable();
         GradientDrawable defaultBg =
                 new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
