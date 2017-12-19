@@ -220,6 +220,7 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
         }
 
         this.editText.addTextChangedListener(this);
+        this.editText.setRawInputType(InputType.TYPE_CLASS_NUMBER);
     }
 
     public void setRightIcon(@DrawableRes int icon) {
@@ -321,11 +322,11 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
     @Override
     public void afterTextChanged(Editable editable) {
 
-        if(editable.toString().isEmpty()) { return; }
+        if(editable.toString().isEmpty() || editable.toString().equals("0")) { return; }
         this.editText.removeTextChangedListener(this);
 
-        editable.replace(0, editable.length(),
-                editable.toString().replaceAll("[^\\d]", ""));
+//        editable.replace(0, editable.length(),
+//                editable.toString().replaceAll("[^\\d]", ""));
         if(this.type == TYPE_CURRENCY) {
             editable.replace(0, editable.length(),
                     TextUtility.convertToCurrency(editable.toString()));
