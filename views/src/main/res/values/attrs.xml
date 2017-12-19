@@ -47,6 +47,10 @@
         <attr name="zp_leftSecondIcon" format="integer"/>
         <attr name="zp_rightIcon" format="integer"/>
         <attr name="zp_activeColor" format="integer"/>
+        <attr name="zp_type" format="enum">
+            <enum name="currency" value="0"/>
+            <enum name="pan" value="1"/>
+        </attr>
     </declare-styleable>
 
 

@@ -4,6 +4,10 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
 
@@ -29,7 +33,7 @@ public class TextUtility {
         int counter = 0;
 
         for (int i = 0; i < text.length(); i++) {
-            if (i != 0 && interval % i == 0 && i < text.length()) {
+            if (i != 0 && i % interval == 0 && i < text.length()) {
                 result.insert(i + counter, divider);
                 counter++;
             }
@@ -48,9 +52,12 @@ public class TextUtility {
         if (text.isEmpty()) {
             return "";
         }
-        if ((text.length() != 16) && (text.length() != 8)) {
-            return "";
-        }
+//        if ((text.length() != 16) && (text.length() != 8)) {
+//            return "";
+//        }
+
+        text = text.replace("-", "");
+
 
         return divideBySpecificChar(text, "-", 4);
     }
@@ -61,13 +68,26 @@ public class TextUtility {
      * @param text is a string for converting to currency format
      * @return text in currency format
      */
-    public static CharSequence convertToCurrency(@NonNull String text) {
-        if (text.isEmpty()) {
-            return "";
+    public static String convertToCurrency(@NonNull String text) {
+        if (text.isEmpty() || text.length() <= 3) {
+            return text;
         }
 
+        text = text.replace(",", "");
+
+        String reverse = new StringBuilder(text).reverse().toString();
+
+        reverse = divideBySpecificChar(reverse, ",", 3);
+
+        return new StringBuilder(reverse).reverse().toString();
+
+//        return NumberFormat.getCurrencyInstance(new Locale("fa", "ir"))
+//                .format(Long.parseLong(text)).replace("ریال", "");
+
+       // return text.replace("5", ",");
+
         //String.format(Locale.US, text);
-        return String.format("|%,d|", text);
+//        return String.format("|%,d|", text);
     }
 
     /**

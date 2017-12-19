@@ -35,12 +35,12 @@
         android:id="@+id/edt_zarin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:zp_type="currency"
         app:zp_rightIcon="@drawable/ic_account"/>
 
-    <me.zhanghai.android.materialedittext.MaterialEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:textSize="20dp"/>
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

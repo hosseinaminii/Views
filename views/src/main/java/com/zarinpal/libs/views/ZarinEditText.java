@@ -11,8 +11,10 @@ import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Patterns;
 import android.view.Gravity;
@@ -25,6 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zarinpal.libs.views.utitlity.FontUtility;
+import com.zarinpal.libs.views.utitlity.TextUtility;
 import com.zarinpal.libs.views.utitlity.UnitUtility;
 
 import java.lang.reflect.Field;
@@ -37,7 +40,10 @@ import me.zhanghai.android.materialedittext.MaterialEditText;
  * Copyright Hossein Amini All Rights Reserved.
  */
 
-public class ZarinEditText extends RelativeLayout {
+public class ZarinEditText extends RelativeLayout implements TextWatcher {
+
+    public static final int TYPE_CURRENCY = 0;
+    public static final int TYPE_PAN      = 1;
 
     private Context     context;
     private FrameLayout frmLeftFirstIcon, frmLeftSecondIcon, frmRightIcon;
@@ -56,6 +62,7 @@ public class ZarinEditText extends RelativeLayout {
     private String text;
     private int    textColorHint;
     private int    activeColor;
+    private int    type;
 
     public ZarinEditText(Context context) {
         super(context);
@@ -77,7 +84,7 @@ public class ZarinEditText extends RelativeLayout {
             this.rightIcon = array.getDrawable(R.styleable.ZarinEditText_zp_rightIcon);
             this.textSize = array.getDimension(R.styleable.ZarinEditText_android_textSize,
                     0);
-            this.gravity = array.getInt(R.styleable.ZarinEditText_android_gravity, Gravity.RIGHT);
+            this.gravity = array.getInt(R.styleable.ZarinEditText_android_gravity, Gravity.LEFT);
             this.hint = array.getString(R.styleable.ZarinEditText_android_hint);
             this.maxLines = array.getInt(R.styleable.ZarinEditText_android_maxLines, 0);
             this.maxLength = array.getInt(R.styleable.ZarinEditText_android_maxLength, 0);
@@ -88,6 +95,7 @@ public class ZarinEditText extends RelativeLayout {
             this.textColorHint = array.getColor(R.styleable.ZarinEditText_android_textColorHint,
                     0);
             this.activeColor = array.getColor(R.styleable.ZarinEditText_zp_activeColor, 0);
+            this.type = array.getInt(R.styleable.ZarinEditText_zp_type, -1);
         } finally {
             array.recycle();
         }
@@ -115,6 +123,7 @@ public class ZarinEditText extends RelativeLayout {
 
         this.setIcons();
         this.setFontFace();
+        this.setType();
 
         this.editText.setGravity(this.gravity);
 
@@ -201,6 +210,14 @@ public class ZarinEditText extends RelativeLayout {
         }
 
         this.editText.setTypeface(FontUtility.getFont(getContext(), fontFamily));
+    }
+
+    private void setType() {
+        if (this.type == -1) {
+            return;
+        }
+
+        this.editText.addTextChangedListener(this);
     }
 
     public void setRightIcon(@DrawableRes int icon) {
@@ -290,4 +307,42 @@ public class ZarinEditText extends RelativeLayout {
     }
 
 
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+//        this.editText.removeTextChangedListener(this);
+//        String result = null;
+//        if(!charSequence.toString().equals("")) {
+//            if(this.type == TYPE_CURRENCY) {
+//                result = TextUtility.convertToCurrency(charSequence.toString());
+//            } else if(this.type == TYPE_PAN) {
+//                result = TextUtility.convertToPan(charSequence.toString());
+//            }
+//        }
+//
+//        this.editText.setText(result);
+//
+//        this.editText.addTextChangedListener(this);
+
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+        this.editText.removeTextChangedListener(this);
+        if(!editable.toString().equals("")) {
+            if(this.type == TYPE_CURRENCY) {
+                editable.replace(0, editable.length(),
+                        TextUtility.convertToCurrency(editable.toString()));
+            } else if(this.type == TYPE_PAN) {
+                editable.replace(0, editable.length(),
+                        TextUtility.convertToCurrency(editable.toString()));
+            }
+        }
+        this.editText.addTextChangedListener(this);
+    }
 }
