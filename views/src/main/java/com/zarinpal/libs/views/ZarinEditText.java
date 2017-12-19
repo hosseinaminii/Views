@@ -16,6 +16,7 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -314,35 +315,24 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-//        this.editText.removeTextChangedListener(this);
-//        String result = null;
-//        if(!charSequence.toString().equals("")) {
-//            if(this.type == TYPE_CURRENCY) {
-//                result = TextUtility.convertToCurrency(charSequence.toString());
-//            } else if(this.type == TYPE_PAN) {
-//                result = TextUtility.convertToPan(charSequence.toString());
-//            }
-//        }
-//
-//        this.editText.setText(result);
-//
-//        this.editText.addTextChangedListener(this);
-
-
     }
 
     @Override
     public void afterTextChanged(Editable editable) {
+
+        if(editable.toString().isEmpty()) { return; }
         this.editText.removeTextChangedListener(this);
-        if(!editable.toString().equals("")) {
-            if(this.type == TYPE_CURRENCY) {
-                editable.replace(0, editable.length(),
-                        TextUtility.convertToCurrency(editable.toString()));
-            } else if(this.type == TYPE_PAN) {
-                editable.replace(0, editable.length(),
-                        TextUtility.convertToCurrency(editable.toString()));
-            }
+
+        editable.replace(0, editable.length(),
+                editable.toString().replaceAll("[^\\d]", ""));
+        if(this.type == TYPE_CURRENCY) {
+            editable.replace(0, editable.length(),
+                    TextUtility.convertToCurrency(editable.toString()));
+        } else if(this.type == TYPE_PAN) {
+            editable.replace(0, editable.length(),
+                    TextUtility.convertToCurrency(editable.toString()));
         }
+
         this.editText.addTextChangedListener(this);
     }
 }
