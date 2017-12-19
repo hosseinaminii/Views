@@ -46,10 +46,7 @@
         <attr name="zp_leftFirstIcon" format="integer"/>
         <attr name="zp_leftSecondIcon" format="integer"/>
         <attr name="zp_rightIcon" format="integer"/>
-        <attr name="zp_textGravity" format="enum">
-            <enum name="left" value="0"/>
-            <enum name="right" value="1"/>
-        </attr>
+        <attr name="zp_activeColor" format="integer"/>
     </declare-styleable>
 
 

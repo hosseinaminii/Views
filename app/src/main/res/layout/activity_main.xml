@@ -32,20 +32,15 @@
         android:text="This Button"/>
 
     <com.zarinpal.libs.views.ZarinEditText
+        android:id="@+id/edt_zarin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:zp_rightIcon="@drawable/card_icon"
-        app:zp_leftFirstIcon="@drawable/card_icon"
-        android:textSize="20dp"
-        android:hint="@string/app_name"
-        android:maxLength="10"
-        android:textColor="#f00"
-        android:textColorHint="#0f0"
-        app:zp_leftSecondIcon="@drawable/card_icon"/>
+        app:zp_rightIcon="@drawable/ic_account"/>
 
-    <EditText
+    <me.zhanghai.android.materialedittext.MaterialEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:textSize="20dp"/>
 
 </LinearLayout>

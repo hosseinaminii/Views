@@ -1,8 +1,15 @@
 package com.zarinpal.libs.views;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.util.AttributeSet;
@@ -13,9 +20,12 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.zarinpal.libs.views.utitlity.FontUtility;
 import com.zarinpal.libs.views.utitlity.UnitUtility;
+
+import java.lang.reflect.Field;
 
 import me.zhanghai.android.materialedittext.MaterialEditText;
 
@@ -27,6 +37,7 @@ import me.zhanghai.android.materialedittext.MaterialEditText;
 
 public class ZarinEditText extends RelativeLayout {
 
+    private Context     context;
     private FrameLayout frmLeftFirstIcon, frmLeftSecondIcon, frmRightIcon;
     private ImageView imgLeftFirstIcon, imgLeftSecondIcon, imgRightIcon;
     private MaterialEditText editText;
@@ -42,14 +53,17 @@ public class ZarinEditText extends RelativeLayout {
     private int    inputType;
     private String text;
     private int    textColorHint;
+    private int    activeColor;
 
     public ZarinEditText(Context context) {
         super(context);
+        this.context = context;
         this.initialize();
     }
 
     public ZarinEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.ZarinEditText);
 
@@ -59,7 +73,6 @@ public class ZarinEditText extends RelativeLayout {
             this.leftFirstIcon = array.getDrawable(R.styleable.ZarinEditText_zp_leftFirstIcon);
             this.leftSecondIcon = array.getDrawable(R.styleable.ZarinEditText_zp_leftSecondIcon);
             this.rightIcon = array.getDrawable(R.styleable.ZarinEditText_zp_rightIcon);
-
             this.textSize = array.getDimension(R.styleable.ZarinEditText_android_textSize,
                     0);
             this.gravity = array.getInt(R.styleable.ZarinEditText_android_gravity, Gravity.RIGHT);
@@ -72,6 +85,7 @@ public class ZarinEditText extends RelativeLayout {
             this.text = array.getString(R.styleable.ZarinEditText_android_text);
             this.textColorHint = array.getColor(R.styleable.ZarinEditText_android_textColorHint,
                     0);
+            this.activeColor = array.getColor(R.styleable.ZarinEditText_zp_activeColor, 0);
         } finally {
             array.recycle();
         }
@@ -81,6 +95,7 @@ public class ZarinEditText extends RelativeLayout {
 
     public ZarinEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.context = context;
         this.initialize();
     }
 
@@ -97,11 +112,14 @@ public class ZarinEditText extends RelativeLayout {
         this.editText = layout.findViewById(R.id.edit_text);
 
         this.setIcons();
+        this.setFontFace();
+
+        this.editText.setGravity(this.gravity);
 
         if (this.textSize != 0) {
             this.editText.setTextSize(UnitUtility.pxToDp(this.textSize, getContext()));
         }
-        this.editText.setGravity(this.gravity);
+
         this.editText.setHint(this.hint);
         if (this.maxLines != 0) {
             this.editText.setMaxLines(this.maxLines);
@@ -112,9 +130,15 @@ public class ZarinEditText extends RelativeLayout {
         if (this.textColor != 0) {
             this.editText.setTextColor(this.textColor);
         }
-        this.editText.setInputType(this.inputType);
+        if (inputType != InputType.TYPE_NUMBER_VARIATION_NORMAL) {
+            this.editText.setInputType(this.inputType);
+        }
         this.editText.setText(this.text);
         this.editText.setHintTextColor(this.textColorHint);
+
+        if (this.activeColor != 0) {
+            ViewCompat.setBackgroundTintList(this.editText, ColorStateList.valueOf(this.activeColor));
+        }
     }
 
     /**
@@ -146,12 +170,64 @@ public class ZarinEditText extends RelativeLayout {
 
         LayoutParams params = (LayoutParams) this.editText.getLayoutParams();
         params.setMargins(0, 0, rightMargin, 0);
-//
+
         this.editText.setLayoutParams(params);
         this.editText.setPadding(leftPadding, this.editText.getPaddingTop(),
                 this.editText.getPaddingRight(), this.editText.getPaddingBottom());
 
     }
 
+    /**
+     * Set font
+     */
+    private void setFontFace() {
+        String fontFamily = FontUtility.IRANSANS_LIGHT;
+
+        switch (fontFace) {
+            case FontUtility.INDEX_IRANSANS_ULIGHT: {
+                fontFamily = FontUtility.IRANSANS_ULIGHT;
+                break;
+            }
+            case FontUtility.INDEX_IRANSANS_BOLD: {
+                fontFamily = FontUtility.IRANSANS_BOLD;
+                break;
+            }
+            case FontUtility.INDEX_OCRA: {
+                fontFamily = FontUtility.OCRA;
+                break;
+            }
+        }
+
+        this.editText.setTypeface(FontUtility.getFont(getContext(), fontFamily));
+    }
+
+    public void setRightIcon(@DrawableRes int icon) {
+        this.rightIcon = this.context.getResources().getDrawable(icon);
+        this.setIcons();
+    }
+
+    public void setLeftFirstIcon(@DrawableRes int icon) {
+        this.leftFirstIcon = this.context.getResources().getDrawable(icon);
+    }
+
+    public void setLeftSecondIcon(@DrawableRes int icon) {
+        this.leftSecondIcon = this.context.getResources().getDrawable(icon);
+    }
+
+    public FrameLayout getRightIcon() {
+        return this.frmRightIcon;
+    }
+
+    public FrameLayout getLeftFirstIcon() {
+        return this.frmLeftFirstIcon;
+    }
+
+    public FrameLayout getFrmLeftSecondIcon() {
+        return this.frmLeftSecondIcon;
+    }
+
+    public MaterialEditText getEditText() {
+        return this.editText;
+    }
 
 }
