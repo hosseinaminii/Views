@@ -123,8 +123,8 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
         this.editText = layout.findViewById(R.id.edit_text);
 
         this.setIcons();
-        this.setFontFace();
-        this.setType();
+        this.setFontFace(this.fontFace);
+        this.setType(this.type);
 
         this.editText.setGravity(this.gravity);
 
@@ -192,7 +192,8 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
     /**
      * Set font
      */
-    private void setFontFace() {
+    private void setFontFace(int fontFace) {
+        this.fontFace = fontFace;
         String fontFamily = FontUtility.IRANSANS_LIGHT;
 
         switch (fontFace) {
@@ -213,8 +214,8 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
         this.editText.setTypeface(FontUtility.getFont(getContext(), fontFamily));
     }
 
-    private void setType() {
-        if (this.type == -1) {
+    private void setType(int type) {
+        if (type == -1) {
             return;
         }
 
