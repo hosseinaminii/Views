@@ -9,6 +9,7 @@
     android:padding="20dp"
     tools:context="com.zarinpal.views.MainActivity">
 
+
     <com.zarinpal.libs.views.ZarinTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,9 +46,9 @@
     <com.zarinpal.libs.views.SectionEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLength="2"
         android:textColor="@color/colorAccent"
-        app:zp_backgroundDrawable="@drawable/bg_drawable"
-        app:zp_hasPassword="false"
-        android:maxLength="2" />
+        app:zp_backgroundDrawable="@drawable/dash_drawable"
+        app:zp_hasPassword="false" />
 
 </LinearLayout>

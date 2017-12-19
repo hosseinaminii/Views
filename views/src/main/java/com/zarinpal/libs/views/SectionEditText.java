@@ -10,13 +10,16 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.zarinpal.libs.views.utitlity.UnitUtility;
 
@@ -78,8 +81,9 @@ public class SectionEditText extends LinearLayout {
     private void addView() {
 
         for (int i = 0; i <= this.itemCount; i++) {
+            RelativeLayout relativeLayout = new RelativeLayout(getContext());
             final ZarinEditText editText = new ZarinEditText(getContext());
-            MaterialEditText edt = editText.getEditText();
+            final MaterialEditText edt = editText.getEditText();
             editText.setTag(i);
 
             InputFilter[] filters = new InputFilter[1];
@@ -88,13 +92,17 @@ public class SectionEditText extends LinearLayout {
             edt.setGravity(Gravity.CENTER);
             edt.setTextColor(this.textColor);
             // handled background user
-            edt.setBackground(null);
-            if (this.backgroundDrawable == null) {
+            final ImageView imageView = new ImageView(getContext());
 
-            } else {
-                edt.setBackgroundDrawable(this.backgroundDrawable);
+            if (this.backgroundDrawable != null) {
+                imageView.setBackground(this.backgroundDrawable);
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(40, 2);
+                params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+                imageView.setLayoutParams(params);
+                edt.setBackgroundDrawable(null);
+                relativeLayout.addView(imageView);
+
             }
-
 
             // check final item for done action
             if (i == itemCount) {
@@ -115,18 +123,30 @@ public class SectionEditText extends LinearLayout {
                     , (int) UnitUtility.dpToPx(getContext(), this.itemHeight));
 
             params.setMargins(this.itemMargin, this.itemMargin, this.itemMargin, this.itemMargin);
-            this.layoutRoot.addView(editText, params);
+
+            relativeLayout.addView(editText, params);
+
+            this.layoutRoot.addView(relativeLayout);
 
             // add view to root layout
             this.editTextList.add(editText);
-
             final int index = i;
+
+            edt.setOnFocusChangeListener(new OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if (backgroundDrawable != null && b) {
+                        imageView.setVisibility(GONE);
+                    } else if (edt.getText().toString().isEmpty()){
+                        imageView.setVisibility(VISIBLE);
+                    }
+                }
+            });
 
             // handled event type user
             edt.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
                 }
 
                 @Override
