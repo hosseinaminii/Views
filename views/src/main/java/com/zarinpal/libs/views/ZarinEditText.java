@@ -8,11 +8,13 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.RequiresApi;
+import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.util.AttributeSet;
+import android.util.Patterns;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -229,5 +231,63 @@ public class ZarinEditText extends RelativeLayout {
     public MaterialEditText getEditText() {
         return this.editText;
     }
+
+    public void setText(String text) {
+        this.editText.setText(text);
+    }
+
+    public void setText(@StringRes int text) {
+        this.editText.setText(text);
+    }
+
+    public String getText() {
+        return this.editText.getText().toString();
+    }
+
+    public boolean isValidPhoneNumber() {
+        return this.getText().matches("^(09{1})+([1-3]{1})+(\\d{8})$");
+    }
+
+    public boolean isValidLandLine() {
+        String value = this.getText();
+        return (value.matches("\\d+") && value.length() == 11);
+    }
+
+    public boolean isValidPostalCode() {
+        String value = this.getText();
+        return (value.matches("\\d+") && value.length() == 10);
+    }
+
+    public boolean isValidURL() {
+        String value = this.getText();
+        return Patterns.WEB_URL.matcher(value).matches();
+    }
+
+    public boolean isValidAddress() {
+        return (this.getText().length() > 15);
+    }
+
+    public boolean isValidIBan() {
+
+        String iBan = this.getText().trim();
+
+        if (!iBan.matches("\\d+")) {
+            return false;
+        }
+
+        iBan = "IR" + iBan;
+
+        return iBan.length() == 26;
+    }
+
+    public boolean isValidEmail() {
+        return Patterns.EMAIL_ADDRESS.matcher(this.getText().trim()).matches();
+    }
+
+    public boolean isValidPassword() {
+        String value = this.getText();
+        return value.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).+$");
+    }
+
 
 }
