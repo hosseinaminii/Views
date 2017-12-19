@@ -53,13 +53,15 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="PinView">
+    <declare-styleable name="SectionEditText">
         <attr name="zp_pinCount" format="integer" />
         <attr name="zp_widthItem" format="dimension" />
         <attr name="zp_heightItem" format="dimension" />
         <attr name="zp_hasPassword" format="boolean" />
         <attr name="zp_marginItem" format="dimension" />
-        <attr name="zp_maxLen" format="integer" />
+        <attr name="android:maxLength" />
+        <attr name="zp_backgroundDrawable" format="integer"/>
+        <attr name="android:textColor"/>
     </declare-styleable>
 
 

@@ -1,52 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:orientation="vertical"
     android:padding="20dp"
     tools:context="com.zarinpal.views.MainActivity">
 
     <com.zarinpal.libs.views.ZarinTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:zp_fontFace="iran_sans_light"
-        app:zp_textFormat="currency"
+        android:text="1000"
         android:textSize="30dp"
-        android:text="1000"/>
+        app:zp_fontFace="iran_sans_light"
+        app:zp_textFormat="currency" />
 
     <com.zarinpal.libs.views.ZarinButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:padding="40dp"
+        android:text="This Button"
         app:zp_cornerRadius="40"
         app:zp_firstColor="@color/colorAccent"
-        app:zp_secondColor="@color/colorPrimary"
         app:zp_fontFace="iransans_bold"
-        app:zp_rippleColor="#ff0"
-        android:padding="40dp"
         app:zp_pressColor="#0f0"
-        android:layout_marginBottom="20dp"
-        android:text="This Button"/>
+        app:zp_rippleColor="#ff0"
+        app:zp_secondColor="@color/colorPrimary" />
 
     <com.zarinpal.libs.views.ZarinEditText
         android:id="@+id/edt_zarin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:zp_type="currency"
-        app:zp_rightIcon="@drawable/ic_account"/>
+        app:zp_rightIcon="@drawable/ic_account"
+        app:zp_type="currency" />
 
     <Button
         android:id="@+id/btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <com.zarinpal.libs.views.ZarinPinView
+        android:layout_height="wrap_content" />
+
+    <com.zarinpal.libs.views.SectionEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        app:zp_backgroundDrawable="@drawable/bg_drawable"
         app:zp_hasPassword="false"
-        app:zp_maxLen="2"
-        />
+        android:maxLength="2" />
 
 </LinearLayout>
