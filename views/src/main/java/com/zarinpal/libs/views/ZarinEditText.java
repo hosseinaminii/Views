@@ -137,7 +137,7 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
             this.editText.setMaxLines(this.maxLines);
         }
         if (this.maxLength != 0) {
-            this.editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(this.maxLength)});
+            this.setMaxLength(this.maxLength);
         }
         if (this.textColor != 0) {
             this.editText.setTextColor(this.textColor);
@@ -219,8 +219,13 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
             return;
         }
 
+        if(type == TYPE_CURRENCY) {
+            this.setMaxLength(13);
+        }
+
         this.editText.addTextChangedListener(this);
         this.editText.setRawInputType(InputType.TYPE_CLASS_NUMBER);
+
     }
 
     public void setRightIcon(@DrawableRes int icon) {
@@ -258,6 +263,10 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
 
     public void setText(@StringRes int text) {
         this.editText.setText(text);
+    }
+
+    public void setMaxLength(int maxLength) {
+        this.editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
     }
 
     public String getText() {
@@ -322,14 +331,31 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
     @Override
     public void afterTextChanged(Editable editable) {
 
-        if(editable.toString().isEmpty() || editable.toString().equals("0")) { return; }
         this.editText.removeTextChangedListener(this);
 
-//        editable.replace(0, editable.length(),
-//                editable.toString().replaceAll("[^\\d]", ""));
+        editable.replace(0, editable.length(),
+                editable.toString().replaceAll("[^\\d]", ""));
+
+        String currentVal = editable.toString();
+        int length = editable.length();
+
+        if(currentVal.isEmpty()) {
+            this.editText.addTextChangedListener(this);
+            return;
+        }
+
         if(this.type == TYPE_CURRENCY) {
-            editable.replace(0, editable.length(),
-                    TextUtility.convertToCurrency(editable.toString()));
+
+            long currencyVal = Long.parseLong(currentVal);
+
+            if(currencyVal == 0) {
+                editable.replace(0, length, "");
+                this.editText.addTextChangedListener(this);
+                return;
+            }
+
+            editable.replace(0, length, TextUtility.convertToCurrency(String.valueOf(currencyVal)));
+
         } else if(this.type == TYPE_PAN) {
             editable.replace(0, editable.length(),
                     TextUtility.convertToCurrency(editable.toString()));

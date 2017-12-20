@@ -74,20 +74,10 @@ public class TextUtility {
         }
 
         text = text.replace(",", "");
-
         String reverse = new StringBuilder(text).reverse().toString();
-
         reverse = divideBySpecificChar(reverse, ",", 3);
 
         return new StringBuilder(reverse).reverse().toString();
-
-//        return NumberFormat.getCurrencyInstance(new Locale("fa", "ir"))
-//                .format(Long.parseLong(text)).replace("ریال", "");
-
-       // return text.replace("5", ",");
-
-        //String.format(Locale.US, text);
-//        return String.format("|%,d|", text);
     }
 
     /**
