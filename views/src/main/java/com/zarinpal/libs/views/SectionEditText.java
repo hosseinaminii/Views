@@ -202,4 +202,16 @@ public class SectionEditText extends LinearLayout {
             edt.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         }
     }
+
+    public String getText() {
+        String str = "";
+        if (this.editTextList == null || this.editTextList.size() <= 0) {
+            return str;
+        }
+        for (ZarinEditText edt : this.editTextList) {
+            str = str + edt.getText();
+        }
+
+        return str;
+    }
 }
