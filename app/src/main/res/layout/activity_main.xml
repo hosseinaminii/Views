@@ -44,11 +44,18 @@
         android:layout_height="wrap_content" />
 
     <com.zarinpal.libs.views.SectionEditText
+        android:id="@+id/edt_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLength="2"
+        android:layout_marginTop="20dp"
+        android:inputType="numberPassword"
+        android:maxLength="1"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
         android:textColor="#484848"
         app:zp_backgroundDrawable="@drawable/dash_drawable"
-        app:zp_hasPassword="false" />
+        app:zp_heightItem="30dp"
+        app:zp_pinCount="6"
+        app:zp_widthItem="15dp" />
 
 </LinearLayout>
