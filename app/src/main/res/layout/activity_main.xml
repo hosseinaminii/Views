@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLength="2"
-        android:textColor="@color/colorAccent"
+        android:textColor="#484848"
         app:zp_backgroundDrawable="@drawable/dash_drawable"
         app:zp_hasPassword="false" />
 
