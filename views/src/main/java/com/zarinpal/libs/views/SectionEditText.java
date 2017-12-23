@@ -52,9 +52,9 @@ public class SectionEditText extends LinearLayout {
 
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.SectionEditText);
         this.itemCount = typedArray.getInteger(R.styleable.SectionEditText_zp_pinCount, 4);
-        this.itemHeight = typedArray.getDimensionPixelSize(R.styleable.SectionEditText_zp_heightItem, 50);
-        this.itemWidth = typedArray.getDimensionPixelSize(R.styleable.SectionEditText_zp_widthItem, 50);
-        this.itemMargin = typedArray.getDimensionPixelSize(R.styleable.SectionEditText_zp_marginItem, 10);
+        this.itemHeight = typedArray.getDimensionPixelSize(R.styleable.SectionEditText_zp_heightItem, 30);
+        this.itemWidth = typedArray.getDimensionPixelSize(R.styleable.SectionEditText_zp_widthItem, 20);
+        this.itemMargin = typedArray.getDimensionPixelSize(R.styleable.SectionEditText_zp_marginItem, 2);
         this.maxLen = typedArray.getInt(R.styleable.SectionEditText_android_maxLength, 1);
         this.hasPassword = typedArray.getBoolean(R.styleable.SectionEditText_zp_hasPassword, false);
         this.backgroundDrawable = typedArray.getDrawable(R.styleable.SectionEditText_zp_backgroundDrawable);
@@ -78,13 +78,14 @@ public class SectionEditText extends LinearLayout {
 
     private void addView() {
 
-        for (int i = 0; i <= this.itemCount; i++) {
+        for (int i = 0; i < this.itemCount; i++) {
             final int index = i;
             // initialize View Item
             RelativeLayout relativeLayout = new RelativeLayout(getContext());
             final ZarinEditText editText = new ZarinEditText(getContext());
             final MaterialEditText edt = editText.getEditText();
             final ImageView imageView = new ImageView(getContext());
+            edt.setBackgroundColor(Color.BLUE);
 
             // set (Max length , Color Hint , Gravity , TextColor , inputType,action keyboard) ->  To Edit Text
             this.setAttrEditText(edt, index);
