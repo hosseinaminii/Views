@@ -60,8 +60,18 @@
         <attr name="zp_hasPassword" format="boolean" />
         <attr name="zp_marginItem" format="dimension" />
         <attr name="android:maxLength" />
-        <attr name="zp_backgroundDrawable" format="integer"/>
-        <attr name="android:textColor"/>
+        <attr name="zp_backgroundDrawable" format="integer" />
+        <attr name="android:textColor" />
+    </declare-styleable>
+
+
+    <declare-styleable name="ZarinPanTextView">
+        <attr name="zp_backgroundNumber" format="integer" />
+        <attr name="android:textColor" />
+        <attr name="zp_textSize" format="dimension" />
+        <attr name="zp_fontFace" />
+        <attr name="zp_setCardNumber" format="string" />
+        <attr name="zp_margin_item" format="dimension" />
     </declare-styleable>
 
 
