@@ -180,6 +180,33 @@ public class ZarinImageView extends android.support.v7.widget.AppCompatImageView
         animator.start();
     }
 
+    public void setGradient(final int alpha, final int lastColor, final int[] colors) {
+
+        this.clearAnimation();
+        this.clearColorFilter();
+        this.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                ValueAnimator valueAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), lastColor, colors[1]);
+                valueAnimator.setDuration(500);
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        GradientDrawable gradient = new GradientDrawable(
+                                GradientDrawable.Orientation.TOP_BOTTOM, new int[]{(int) valueAnimator.getAnimatedValue(),
+                                Color.WHITE, Color.WHITE, Color.WHITE}
+                        );
+                        gradient.setCornerRadius(0);
+                        gradient.setAlpha(alpha);
+                        setImageDrawable(gradient);
+                    }
+                });
+
+                valueAnimator.start();
+            }
+        }, 250);
+    }
 }
 
 class BlurBuilder {
