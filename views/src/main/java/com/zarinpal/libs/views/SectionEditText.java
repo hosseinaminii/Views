@@ -15,10 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.zarinpal.libs.views.utitlity.FontUtility;
 import com.zarinpal.libs.views.utitlity.UnitUtility;
 
 import java.util.ArrayList;
@@ -41,7 +43,7 @@ public class SectionEditText extends LinearLayout {
     private boolean hasPassword;
     private Drawable backgroundDrawable;
     private Integer textColor;
-    private List<ZarinEditText> editTextList;
+    private List<EditText> editTextList;
 
     public SectionEditText(Context context) {
         super(context);
@@ -82,10 +84,10 @@ public class SectionEditText extends LinearLayout {
             final int index = i;
             // initialize View Item
             RelativeLayout relativeLayout = new RelativeLayout(getContext());
-            final ZarinEditText editText = new ZarinEditText(getContext());
-            final MaterialEditText edt = editText.getEditText();
+            final EditText edt = new EditText(getContext());
+//            final MaterialEditText edt = editText.getEditText();
             final ImageView imageView = new ImageView(getContext());
-            edt.setBackgroundColor(Color.BLUE);
+            edt.setTypeface(FontUtility.getFont(getContext(),FontUtility.IRANSANS_BOLD));
 
             // set (Max length , Color Hint , Gravity , TextColor , inputType,action keyboard) ->  To Edit Text
             this.setAttrEditText(edt, index);
@@ -96,11 +98,11 @@ public class SectionEditText extends LinearLayout {
 
 
             // Add EditText and getParam()  -> {size , margin}
-            relativeLayout.addView(editText, getParam());
+            relativeLayout.addView(edt, getParam());
 
             // add view to root layout
             this.layoutRoot.addView(relativeLayout);
-            this.editTextList.add(editText);
+            this.editTextList.add(edt);
 
 
             // Check focus EditText for Visibility ImageView
@@ -136,6 +138,7 @@ public class SectionEditText extends LinearLayout {
 
     private void handledUserType(String value, int index) {
 
+
         // check if user input empty And not first Item requested last Item focus
         if ((value.isEmpty()) && (index != 0)) {
             editTextList.get((index - 1)).requestFocus();
@@ -147,7 +150,7 @@ public class SectionEditText extends LinearLayout {
         }
 
         // check EditText ArrayList Size Bigger off (index + 1) requested next Item focus
-        if (editTextList.size() > (index + 1)) {
+        if (!(value.isEmpty()) && (editTextList.size() > (index + 1))) {
             editTextList.get(index + 1).requestFocus();
         }
     }
@@ -163,7 +166,7 @@ public class SectionEditText extends LinearLayout {
         return params;
     }
 
-    private void handledBackground(MaterialEditText edt, RelativeLayout layout, ImageView img) {
+    private void handledBackground(EditText edt, RelativeLayout layout, ImageView img) {
         // Check Exist Drawable Background for EditText
         if (this.backgroundDrawable != null) {
             img.setBackground(this.backgroundDrawable);
@@ -173,12 +176,12 @@ public class SectionEditText extends LinearLayout {
                             30), (int) UnitUtility.dpToPx(getContext(), 2));
             params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
             img.setLayoutParams(params);
-            edt.setBackgroundDrawable(null);
+            edt.setBackground(null);
             layout.addView(img);
         }
     }
 
-    private void setAttrEditText(MaterialEditText edt, int index) {
+    private void setAttrEditText(EditText edt, int index) {
 
         // set Max length To Edit Text
         InputFilter[] filters = new InputFilter[1];
@@ -209,7 +212,7 @@ public class SectionEditText extends LinearLayout {
         if (this.editTextList == null || this.editTextList.size() <= 0) {
             return str;
         }
-        for (ZarinEditText edt : this.editTextList) {
+        for (EditText edt : this.editTextList) {
             str = str + edt.getText();
         }
 
