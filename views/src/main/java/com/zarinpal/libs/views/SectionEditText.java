@@ -196,7 +196,7 @@ public class SectionEditText extends LinearLayout {
         if (this.hasPassword) {
             edt.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         } else {
-            edt.setInputType(InputType.TYPE_CLASS_TEXT);
+            edt.setInputType(InputType.TYPE_CLASS_NUMBER);
         }
 
         // set Action soft keyboard
