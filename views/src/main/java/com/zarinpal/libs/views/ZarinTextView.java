@@ -99,6 +99,8 @@ public class ZarinTextView extends android.support.v7.widget.AppCompatTextView {
      */
     public void setActiveLongPressCopyText(boolean state,
                                            @Nullable final TextUtility.OnTextCopyListener listener) {
+        if(!state) { return; }
+
         if (getText().toString().isEmpty()) {
             return;
         }
