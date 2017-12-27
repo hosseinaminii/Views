@@ -36,12 +36,12 @@
         android:id="@+id/edt_zarin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:zp_leftFirstIcon="@drawable/ic_account"
-        app:zp_padding_left_first_icon="10dp"
-        app:zp_padding_right_icon="5dp"
+        android:gravity="right"
+        android:text="Hellosdfosdofsad"
+        app:zp_is_arrow_visible="true"
         app:zp_is_clickable="false"
-        app:zp_rightIcon="@drawable/ic_account"
-        app:zp_type="currency"/>
+        app:zp_padding_left_first_icon="10dp"
+        app:zp_padding_right_icon="5dp"/>
 
     <Button
         android:id="@+id/btn"
@@ -77,11 +77,11 @@
         app:zp_textSize="13sp"/>
 
     <LinearLayout
+        android:id="@+id/test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/test"
-        android:clickable="true"
-        android:background="?attr/selectableItemBackground">
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true">
 
         <com.zarinpal.libs.views.ZarinTextView
             android:layout_width="wrap_content"

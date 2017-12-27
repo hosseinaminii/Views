@@ -54,6 +54,7 @@
         <attr name="zp_padding_left_first_icon" format="dimension" />
         <attr name="zp_padding_left_second_icon" format="dimension" />
         <attr name="zp_is_clickable" format="boolean"/>
+        <attr name="zp_is_arrow_visible" format="boolean"/>
         <attr name="zp_type" format="enum">
             <enum name="currency" value="0"/>
             <enum name="pan" value="1"/>

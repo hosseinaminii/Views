@@ -38,7 +38,7 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
     public static final int TYPE_PAN      = 1;
 
     private Context     context;
-    private FrameLayout frmLeftFirstIcon, frmLeftSecondIcon, frmRightIcon;
+    private FrameLayout frmLeftFirstIcon, frmLeftSecondIcon, frmRightIcon, frmArrow;
     private ImageView imgLeftFirstIcon, imgLeftSecondIcon, imgRightIcon;
     private MaterialEditText editText;
 
@@ -58,6 +58,7 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
     private int    tintRightIcon, tintLeftFirstIcon, tintLeftSecondIcon;
     private Integer paddingRightIcon, paddingLeftFirstIcon, paddingLeftSecondIcon;
     private boolean isClickable;
+    private boolean isArrowVisible;
 
     public ZarinEditText(Context context) {
         super(context);
@@ -103,6 +104,8 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
             this.paddingLeftSecondIcon =
                     array.getDimensionPixelSize(R.styleable.ZarinEditText_zp_padding_left_second_icon, 0);
             this.isClickable = array.getBoolean(R.styleable.ZarinEditText_zp_is_clickable, true);
+            this.isArrowVisible = array.getBoolean(R.styleable.ZarinEditText_zp_is_arrow_visible,
+                    false);
         } finally {
             array.recycle();
         }
@@ -123,6 +126,7 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
         this.frmLeftFirstIcon = layout.findViewById(R.id.frm_left_first_icon);
         this.frmLeftSecondIcon = layout.findViewById(R.id.frm_left_second_icon);
         this.frmRightIcon = layout.findViewById(R.id.frm_right_icon);
+        this.frmArrow = layout.findViewById(R.id.frm_arrow);
         this.imgLeftFirstIcon = layout.findViewById(R.id.img_left_first_icon);
         this.imgLeftSecondIcon = layout.findViewById(R.id.img_left_second_icon);
         this.imgRightIcon = layout.findViewById(R.id.img_right_icon);
@@ -134,6 +138,7 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
         this.setTintColor();
         this.setPadding();
 
+        this.setText(this.text);
         this.editText.setGravity(this.gravity);
 
         if (this.textSize != 0) {
@@ -154,18 +159,23 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
         if (inputType != InputType.TYPE_NUMBER_VARIATION_NORMAL) {
             this.editText.setInputType(this.inputType);
         }
-        this.editText.setText(this.text);
+
         this.editText.setHintTextColor(this.textColorHint);
 
         if (this.activeColor != 0) {
             ViewCompat.setBackgroundTintList(this.editText, ColorStateList.valueOf(this.activeColor));
         }
 
-        if(!this.isClickable) {
+        if (!this.isClickable) {
             this.editText.setLongClickable(false);
             this.editText.setFocusableInTouchMode(false);
             this.editText.setCursorVisible(false);
         }
+
+        if(this.isArrowVisible && leftFirstIcon == null && leftSecondIcon == null) {
+            frmArrow.setVisibility(VISIBLE);
+        }
+
     }
 
     /**
