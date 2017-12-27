@@ -35,6 +35,7 @@
         android:id="@+id/edt_zarin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:zp_padding_right_icon="5dp"
         app:zp_rightIcon="@drawable/ic_account"
         app:zp_type="currency" />
 
