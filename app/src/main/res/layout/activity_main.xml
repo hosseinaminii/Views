@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:text="1000"
         android:textSize="30dp"
+
         app:zp_fontFace="iran_sans_light"
         app:zp_textFormat="currency"/>
 
@@ -38,6 +39,7 @@
         app:zp_leftFirstIcon="@drawable/ic_account"
         app:zp_padding_left_first_icon="10dp"
         app:zp_padding_right_icon="5dp"
+        app:zp_is_clickable="false"
         app:zp_rightIcon="@drawable/ic_account"
         app:zp_type="currency"/>
 

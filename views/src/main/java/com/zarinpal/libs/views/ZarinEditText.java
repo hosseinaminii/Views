@@ -56,7 +56,8 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
     private int    activeColor;
     private int    type;
     private int    tintRightIcon, tintLeftFirstIcon, tintLeftSecondIcon;
-    private Integer    paddingRightIcon, paddingLeftFirstIcon, paddingLeftSecondIcon;
+    private Integer paddingRightIcon, paddingLeftFirstIcon, paddingLeftSecondIcon;
+    private boolean isClickable;
 
     public ZarinEditText(Context context) {
         super(context);
@@ -101,6 +102,7 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
                     array.getDimensionPixelSize(R.styleable.ZarinEditText_zp_padding_left_first_icon, 0);
             this.paddingLeftSecondIcon =
                     array.getDimensionPixelSize(R.styleable.ZarinEditText_zp_padding_left_second_icon, 0);
+            this.isClickable = array.getBoolean(R.styleable.ZarinEditText_zp_is_clickable, true);
         } finally {
             array.recycle();
         }
@@ -139,6 +141,7 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
         }
 
         this.editText.setHint(this.hint);
+
         if (this.maxLines != 0) {
             this.editText.setMaxLines(this.maxLines);
         }
@@ -156,6 +159,12 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
 
         if (this.activeColor != 0) {
             ViewCompat.setBackgroundTintList(this.editText, ColorStateList.valueOf(this.activeColor));
+        }
+
+        if(!this.isClickable) {
+            this.editText.setLongClickable(false);
+            this.editText.setFocusableInTouchMode(false);
+            this.editText.setCursorVisible(false);
         }
     }
 
@@ -235,27 +244,27 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
     }
 
     private void setTintColor() {
-        if(this.tintRightIcon != 0) {
+        if (this.tintRightIcon != 0) {
             this.imgRightIcon.setColorFilter(this.tintRightIcon);
         }
-        if(this.tintLeftFirstIcon != 0) {
+        if (this.tintLeftFirstIcon != 0) {
             this.imgLeftFirstIcon.setColorFilter(this.tintLeftFirstIcon);
         }
-        if(this.tintLeftSecondIcon != 0) {
+        if (this.tintLeftSecondIcon != 0) {
             this.imgLeftSecondIcon.setColorFilter(this.tintLeftSecondIcon);
         }
     }
 
     private void setPadding() {
-        if(this.paddingRightIcon != 0) {
+        if (this.paddingRightIcon != 0) {
             this.imgRightIcon.setPadding(this.paddingRightIcon, this.paddingRightIcon,
                     this.paddingRightIcon, this.paddingRightIcon);
         }
-        if(this.paddingLeftFirstIcon != 0) {
+        if (this.paddingLeftFirstIcon != 0) {
             this.imgLeftFirstIcon.setPadding(this.paddingLeftFirstIcon, this.paddingLeftFirstIcon,
                     this.paddingLeftFirstIcon, this.paddingLeftFirstIcon);
         }
-        if(this.paddingLeftSecondIcon != 0) {
+        if (this.paddingLeftSecondIcon != 0) {
             this.imgLeftSecondIcon.setPadding(this.paddingLeftSecondIcon, this.paddingLeftSecondIcon,
                     this.paddingLeftSecondIcon, this.paddingLeftSecondIcon);
         }
