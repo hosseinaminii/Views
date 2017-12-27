@@ -3,35 +3,26 @@ package com.zarinpal.libs.views;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.zarinpal.libs.views.utitlity.FontUtility;
 import com.zarinpal.libs.views.utitlity.TextUtility;
 import com.zarinpal.libs.views.utitlity.UnitUtility;
-
-import java.lang.reflect.Field;
 
 import me.zhanghai.android.materialedittext.MaterialEditText;
 
@@ -64,6 +55,8 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
     private int    textColorHint;
     private int    activeColor;
     private int    type;
+    private int    tintRightIcon, tintLeftFirstIcon, tintLeftSecondIcon;
+    private int    paddingRightIcon, paddingLeftFirstIcon, paddingLeftSecondIcon;
 
     public ZarinEditText(Context context) {
         super(context);
@@ -97,6 +90,17 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
                     0);
             this.activeColor = array.getColor(R.styleable.ZarinEditText_zp_activeColor, 0);
             this.type = array.getInt(R.styleable.ZarinEditText_zp_type, -1);
+            this.tintRightIcon = array.getColor(R.styleable.ZarinEditText_zp_tint_right_icon, 0);
+            this.tintLeftFirstIcon =
+                    array.getColor(R.styleable.ZarinEditText_zp_tint_left_first_icon, 0);
+            this.tintLeftSecondIcon =
+                    array.getColor(R.styleable.ZarinEditText_zp_tint_left_second_icon, 0);
+            this.paddingRightIcon =
+                    array.getColor(R.styleable.ZarinEditText_zp_padding_right_icon, 0);
+            this.paddingLeftFirstIcon =
+                    array.getColor(R.styleable.ZarinEditText_zp_padding_left_first_icon, 0);
+            this.paddingLeftSecondIcon =
+                    array.getColor(R.styleable.ZarinEditText_zp_padding_left_second_icon, 0);
         } finally {
             array.recycle();
         }
@@ -125,6 +129,8 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
         this.setIcons();
         this.setFontFace(this.fontFace);
         this.setType(this.type);
+        this.setTintColor();
+        this.setPadding();
 
         this.editText.setGravity(this.gravity);
 
@@ -219,12 +225,43 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
             return;
         }
 
-        if(type == TYPE_CURRENCY) {
+        if (type == TYPE_CURRENCY) {
             this.setMaxLength(13);
         }
 
         this.editText.addTextChangedListener(this);
         this.editText.setRawInputType(InputType.TYPE_CLASS_NUMBER);
+
+    }
+
+    private void setTintColor() {
+        if(this.tintRightIcon != 0) {
+            this.imgRightIcon.setColorFilter(this.tintRightIcon);
+        }
+        if(this.tintLeftFirstIcon != 0) {
+            this.imgLeftFirstIcon.setColorFilter(this.tintLeftFirstIcon);
+        }
+        if(this.tintLeftSecondIcon != 0) {
+            this.imgLeftSecondIcon.setColorFilter(this.tintLeftSecondIcon);
+        }
+    }
+
+    private void setPadding() {
+        if(this.paddingRightIcon != 0) {
+            this.paddingRightIcon = (int) UnitUtility.dpToPx(this.context, this.paddingRightIcon);
+            this.imgRightIcon.setPadding(this.paddingRightIcon, this.paddingRightIcon,
+                    this.paddingRightIcon, this.paddingRightIcon);
+        }
+        if(this.paddingLeftFirstIcon != 0) {
+            this.paddingLeftFirstIcon = (int) UnitUtility.dpToPx(this.context, this.paddingLeftFirstIcon);
+            this.imgRightIcon.setPadding(this.paddingLeftFirstIcon, this.paddingLeftFirstIcon,
+                    this.paddingLeftFirstIcon, this.paddingLeftFirstIcon);
+        }
+        if(this.paddingLeftSecondIcon != 0) {
+            this.paddingLeftSecondIcon = (int) UnitUtility.dpToPx(this.context, this.paddingLeftSecondIcon);
+            this.imgRightIcon.setPadding(this.paddingLeftSecondIcon, this.paddingLeftSecondIcon,
+                    this.paddingLeftSecondIcon, this.paddingLeftSecondIcon);
+        }
 
     }
 
@@ -337,18 +374,18 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
                 editable.toString().replaceAll("[^\\d]", ""));
 
         String currentVal = editable.toString();
-        int length = editable.length();
+        int    length     = editable.length();
 
-        if(currentVal.isEmpty()) {
+        if (currentVal.isEmpty()) {
             this.editText.addTextChangedListener(this);
             return;
         }
 
-        if(this.type == TYPE_CURRENCY) {
+        if (this.type == TYPE_CURRENCY) {
 
             long currencyVal = Long.parseLong(currentVal);
 
-            if(currencyVal == 0) {
+            if (currencyVal == 0) {
                 editable.replace(0, length, "");
                 this.editText.addTextChangedListener(this);
                 return;
@@ -356,7 +393,7 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
 
             editable.replace(0, length, TextUtility.convertToCurrency(String.valueOf(currencyVal)));
 
-        } else if(this.type == TYPE_PAN) {
+        } else if (this.type == TYPE_PAN) {
             editable.replace(0, editable.length(),
                     TextUtility.convertToCurrency(editable.toString()));
         }
