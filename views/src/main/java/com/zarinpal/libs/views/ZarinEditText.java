@@ -56,7 +56,7 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
     private int    activeColor;
     private int    type;
     private int    tintRightIcon, tintLeftFirstIcon, tintLeftSecondIcon;
-    private int    paddingRightIcon, paddingLeftFirstIcon, paddingLeftSecondIcon;
+    private Integer    paddingRightIcon, paddingLeftFirstIcon, paddingLeftSecondIcon;
 
     public ZarinEditText(Context context) {
         super(context);
@@ -96,11 +96,11 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
             this.tintLeftSecondIcon =
                     array.getColor(R.styleable.ZarinEditText_zp_tint_left_second_icon, 0);
             this.paddingRightIcon =
-                    array.getColor(R.styleable.ZarinEditText_zp_padding_right_icon, 0);
+                    array.getDimensionPixelSize(R.styleable.ZarinEditText_zp_padding_right_icon, 0);
             this.paddingLeftFirstIcon =
-                    array.getColor(R.styleable.ZarinEditText_zp_padding_left_first_icon, 0);
+                    array.getDimensionPixelSize(R.styleable.ZarinEditText_zp_padding_left_first_icon, 0);
             this.paddingLeftSecondIcon =
-                    array.getColor(R.styleable.ZarinEditText_zp_padding_left_second_icon, 0);
+                    array.getDimensionPixelSize(R.styleable.ZarinEditText_zp_padding_left_second_icon, 0);
         } finally {
             array.recycle();
         }
@@ -248,7 +248,6 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
 
     private void setPadding() {
         if(this.paddingRightIcon != 0) {
-            this.paddingRightIcon = (int) UnitUtility.dpToPx(this.context, this.paddingRightIcon);
             this.imgRightIcon.setPadding(this.paddingRightIcon, this.paddingRightIcon,
                     this.paddingRightIcon, this.paddingRightIcon);
         }
