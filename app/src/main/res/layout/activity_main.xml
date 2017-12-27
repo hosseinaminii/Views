@@ -37,6 +37,8 @@
         android:layout_height="wrap_content"
         app:zp_padding_right_icon="5dp"
         app:zp_rightIcon="@drawable/ic_account"
+        app:zp_leftFirstIcon="@drawable/ic_account"
+        app:zp_padding_left_first_icon="10dp"
         app:zp_type="currency" />
 
     <Button

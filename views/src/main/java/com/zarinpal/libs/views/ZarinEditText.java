@@ -252,13 +252,11 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
                     this.paddingRightIcon, this.paddingRightIcon);
         }
         if(this.paddingLeftFirstIcon != 0) {
-            this.paddingLeftFirstIcon = (int) UnitUtility.dpToPx(this.context, this.paddingLeftFirstIcon);
-            this.imgRightIcon.setPadding(this.paddingLeftFirstIcon, this.paddingLeftFirstIcon,
+            this.imgLeftFirstIcon.setPadding(this.paddingLeftFirstIcon, this.paddingLeftFirstIcon,
                     this.paddingLeftFirstIcon, this.paddingLeftFirstIcon);
         }
         if(this.paddingLeftSecondIcon != 0) {
-            this.paddingLeftSecondIcon = (int) UnitUtility.dpToPx(this.context, this.paddingLeftSecondIcon);
-            this.imgRightIcon.setPadding(this.paddingLeftSecondIcon, this.paddingLeftSecondIcon,
+            this.imgLeftSecondIcon.setPadding(this.paddingLeftSecondIcon, this.paddingLeftSecondIcon,
                     this.paddingLeftSecondIcon, this.paddingLeftSecondIcon);
         }
 
