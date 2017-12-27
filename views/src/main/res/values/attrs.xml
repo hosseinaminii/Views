@@ -48,8 +48,11 @@
         <attr name="zp_rightIcon" format="integer"/>
         <attr name="zp_activeColor" format="integer"/>
         <attr name="zp_tint_right_icon" format="color"/>
-        <attr name="zp_tint_left_first_icon_tint" format="color"/>
-        <attr name="zp_tint_left_second_icon_tint" format="color"/>
+        <attr name="zp_tint_left_first_icon" format="color"/>
+        <attr name="zp_tint_left_second_icon" format="color"/>
+        <attr name="zp_padding_right_icon" format="dimension" />
+        <attr name="zp_padding_left_first_icon" format="dimension" />
+        <attr name="zp_padding_left_second_icon" format="dimension" />
         <attr name="zp_type" format="enum">
             <enum name="currency" value="0"/>
             <enum name="pan" value="1"/>

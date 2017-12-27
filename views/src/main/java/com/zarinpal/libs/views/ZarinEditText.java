@@ -56,6 +56,7 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
     private int    activeColor;
     private int    type;
     private int    tintRightIcon, tintLeftFirstIcon, tintLeftSecondIcon;
+    private int    paddingRightIcon, paddingLeftFirstIcon, paddingLeftSecondIcon;
 
     public ZarinEditText(Context context) {
         super(context);
@@ -90,10 +91,16 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
             this.activeColor = array.getColor(R.styleable.ZarinEditText_zp_activeColor, 0);
             this.type = array.getInt(R.styleable.ZarinEditText_zp_type, -1);
             this.tintRightIcon = array.getColor(R.styleable.ZarinEditText_zp_tint_right_icon, 0);
-            this.tintLeftFirstIcon = array.getColor(R.styleable.ZarinEditText_zp_tint_left_first_icon_tint,
-                    0);
-            this.tintLeftSecondIcon = array.getColor(R.styleable.ZarinEditText_zp_leftSecondIcon,
-                    0);
+            this.tintLeftFirstIcon =
+                    array.getColor(R.styleable.ZarinEditText_zp_tint_left_first_icon, 0);
+            this.tintLeftSecondIcon =
+                    array.getColor(R.styleable.ZarinEditText_zp_tint_left_second_icon, 0);
+            this.paddingRightIcon =
+                    array.getColor(R.styleable.ZarinEditText_zp_padding_right_icon, 0);
+            this.paddingLeftFirstIcon =
+                    array.getColor(R.styleable.ZarinEditText_zp_padding_left_first_icon, 0);
+            this.paddingLeftSecondIcon =
+                    array.getColor(R.styleable.ZarinEditText_zp_padding_left_second_icon, 0);
         } finally {
             array.recycle();
         }
@@ -123,6 +130,7 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
         this.setFontFace(this.fontFace);
         this.setType(this.type);
         this.setTintColor();
+        this.setPadding();
 
         this.editText.setGravity(this.gravity);
 
@@ -236,6 +244,25 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
         if(this.tintLeftSecondIcon != 0) {
             this.imgLeftSecondIcon.setColorFilter(this.tintLeftSecondIcon);
         }
+    }
+
+    private void setPadding() {
+        if(this.paddingRightIcon != 0) {
+            this.paddingRightIcon = (int) UnitUtility.dpToPx(this.context, this.paddingRightIcon);
+            this.imgRightIcon.setPadding(this.paddingRightIcon, this.paddingRightIcon,
+                    this.paddingRightIcon, this.paddingRightIcon);
+        }
+        if(this.paddingLeftFirstIcon != 0) {
+            this.paddingLeftFirstIcon = (int) UnitUtility.dpToPx(this.context, this.paddingLeftFirstIcon);
+            this.imgRightIcon.setPadding(this.paddingLeftFirstIcon, this.paddingLeftFirstIcon,
+                    this.paddingLeftFirstIcon, this.paddingLeftFirstIcon);
+        }
+        if(this.paddingLeftSecondIcon != 0) {
+            this.paddingLeftSecondIcon = (int) UnitUtility.dpToPx(this.context, this.paddingLeftSecondIcon);
+            this.imgRightIcon.setPadding(this.paddingLeftSecondIcon, this.paddingLeftSecondIcon,
+                    this.paddingLeftSecondIcon, this.paddingLeftSecondIcon);
+        }
+
     }
 
     public void setRightIcon(@DrawableRes int icon) {
