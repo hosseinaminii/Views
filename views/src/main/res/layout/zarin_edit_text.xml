@@ -21,8 +21,7 @@
     <me.zhanghai.android.materialedittext.MaterialEditText
         android:id="@+id/edit_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
+        android:layout_height="wrap_content"/>
 
     <FrameLayout
         android:id="@+id/frm_left_first_icon"
@@ -36,6 +35,8 @@
             android:id="@+id/img_left_first_icon"
             android:layout_width="40dp"
             android:layout_height="40dp" />
+
+
     </FrameLayout>
 
     <FrameLayout
@@ -52,6 +53,22 @@
             android:id="@+id/img_left_second_icon"
             android:layout_width="40dp"
             android:layout_height="40dp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frm_arrow"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignTop="@+id/edit_text"
+        android:layout_marginTop="13dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/img_arrow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_arrow"/>
+
     </FrameLayout>
 
 

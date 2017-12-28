@@ -38,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 
 }

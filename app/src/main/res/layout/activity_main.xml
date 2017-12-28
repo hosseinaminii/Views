@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:padding="20dp"
-    tools:context="com.zarinpal.views.MainActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+              android:padding="20dp"
+              tools:context="com.zarinpal.views.MainActivity">
 
 
     <com.zarinpal.libs.views.ZarinTextView
@@ -15,8 +15,9 @@
         android:layout_height="wrap_content"
         android:text="1000"
         android:textSize="30dp"
+
         app:zp_fontFace="iran_sans_light"
-        app:zp_textFormat="currency" />
+        app:zp_textFormat="currency"/>
 
     <com.zarinpal.libs.views.ZarinButton
         android:layout_width="wrap_content"
@@ -29,20 +30,23 @@
         app:zp_fontFace="iransans_bold"
         app:zp_pressColor="#0f0"
         app:zp_rippleColor="#ff0"
-        app:zp_secondColor="@color/colorPrimary" />
+        app:zp_secondColor="@color/colorPrimary"/>
 
     <com.zarinpal.libs.views.ZarinEditText
         android:id="@+id/edt_zarin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:zp_padding_right_icon="5dp"
-        app:zp_rightIcon="@drawable/ic_account"
-        app:zp_type="currency" />
+        android:gravity="right"
+        android:text="Hellosdfosdofsad"
+        app:zp_is_arrow_visible="true"
+        app:zp_is_clickable="false"
+        app:zp_padding_left_first_icon="10dp"
+        app:zp_padding_right_icon="5dp"/>
 
     <Button
         android:id="@+id/btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
     <com.zarinpal.libs.views.SectionEditText
         android:id="@+id/edt_password"
@@ -57,7 +61,7 @@
         app:zp_backgroundDrawable="@drawable/dash_drawable"
         app:zp_heightItem="30dp"
         app:zp_pinCount="6"
-        app:zp_widthItem="15dp" />
+        app:zp_widthItem="15dp"/>
 
 
     <com.zarinpal.libs.views.ZarinPanTextView
@@ -70,6 +74,19 @@
         app:zp_fontFace="iransans_bold"
         app:zp_margin_item="5dp"
         app:zp_setCardNumber="8237-8238-4861-8461"
-        app:zp_textSize="13sp" />
+        app:zp_textSize="13sp"/>
+
+    <LinearLayout
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true">
+
+        <com.zarinpal.libs.views.ZarinTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HelOOoooOOOOo"/>
+    </LinearLayout>
 
 </LinearLayout>
