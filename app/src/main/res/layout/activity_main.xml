@@ -37,11 +37,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:text="Hellosdfosdofsad"
-        app:zp_is_arrow_visible="true"
-        app:zp_is_clickable="false"
-        app:zp_padding_left_first_icon="10dp"
-        app:zp_padding_right_icon="5dp"/>
+        android:maxLines="1"
+        app:zp_type="pan"
+        app:zp_is_arrow_visible="true"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="2"/>
 
     <Button
         android:id="@+id/btn"
