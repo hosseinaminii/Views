@@ -342,6 +342,15 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
         return this.getText().matches("^(09{1})+([1-3]{1})+(\\d{8})$");
     }
 
+    /**
+     * Convert a text with currency format into a normal text
+     *
+     * @return normal text
+     */
+    public long getCurrencyValue() {
+        return TextUtility.getCurrencyValue(getText());
+    }
+
     public boolean isValidLandLine() {
         String value = this.getText();
         return (value.matches("\\d+") && value.length() == 11);
