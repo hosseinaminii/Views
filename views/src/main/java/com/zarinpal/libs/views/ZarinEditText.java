@@ -20,6 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.zarinpal.libs.views.param.ZarinEditTextType;
 import com.zarinpal.libs.views.utitlity.FontUtility;
 import com.zarinpal.libs.views.utitlity.TextUtility;
 import com.zarinpal.libs.views.utitlity.UnitUtility;
@@ -34,8 +35,8 @@ import me.zhanghai.android.materialedittext.MaterialEditText;
 
 public class ZarinEditText extends RelativeLayout implements TextWatcher {
 
-    public static final int TYPE_CURRENCY = 0;
-    public static final int TYPE_PAN      = 1;
+//    public static final int TYPE_CURRENCY = 0;
+//    public static final int TYPE_PAN      = 1;
 
     private Context     context;
     private FrameLayout frmLeftFirstIcon, frmLeftSecondIcon, frmRightIcon, frmArrow;
@@ -148,6 +149,9 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
         this.editText.setHint(this.hint);
 
         if (this.maxLines != 0) {
+            if(this.maxLines == 1) {
+                this.editText.setSingleLine();
+            }
             this.editText.setMaxLines(this.maxLines);
         }
         if (this.maxLength != 0) {
@@ -174,6 +178,11 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
 
         if(this.isArrowVisible && leftFirstIcon == null && leftSecondIcon == null) {
             frmArrow.setVisibility(VISIBLE);
+            this.editText.setPadding(
+                    (int)UnitUtility.dpToPx(this.context, 24),
+                    this.editText.getPaddingTop(),
+                    this.editText.getPaddingRight(),
+                    this.editText.getPaddingBottom());
         }
 
     }
@@ -239,18 +248,21 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
         this.editText.setTypeface(FontUtility.getFont(getContext(), fontFamily));
     }
 
-    private void setType(int type) {
+    public void setType(@ZarinEditTextType.EditTextType int type) {
+        this.type = type;
+
+        this.editText.removeTextChangedListener(this);
+
         if (type == -1) {
             return;
         }
 
-        if (type == TYPE_CURRENCY) {
+        if (type == ZarinEditTextType.CURRENCY) {
             this.setMaxLength(13);
         }
 
         this.editText.addTextChangedListener(this);
         this.editText.setRawInputType(InputType.TYPE_CLASS_NUMBER);
-
     }
 
     private void setTintColor() {
@@ -397,7 +409,7 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
             return;
         }
 
-        if (this.type == TYPE_CURRENCY) {
+        if (this.type == ZarinEditTextType.CURRENCY) {
 
             long currencyVal = Long.parseLong(currentVal);
 
@@ -409,9 +421,9 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
 
             editable.replace(0, length, TextUtility.convertToCurrency(String.valueOf(currencyVal)));
 
-        } else if (this.type == TYPE_PAN) {
+        } else if (this.type == ZarinEditTextType.PAN) {
             editable.replace(0, editable.length(),
-                    TextUtility.convertToCurrency(editable.toString()));
+                    TextUtility.convertToPan(editable.toString()));
         }
 
         this.editText.addTextChangedListener(this);

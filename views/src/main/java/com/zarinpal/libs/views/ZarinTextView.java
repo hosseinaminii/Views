@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.zarinpal.libs.views.param.ZarinTextViewFormat;
 import com.zarinpal.libs.views.utitlity.FontUtility;
 import com.zarinpal.libs.views.utitlity.TextUtility;
 
@@ -17,11 +18,6 @@ import com.zarinpal.libs.views.utitlity.TextUtility;
  */
 
 public class ZarinTextView extends android.support.v7.widget.AppCompatTextView {
-
-    private static final int FORMAT_NORMAL      = 0;
-    private static final int FORMAT_PAN         = 1;
-    private static final int FORMAT_CURRENCY    = 2;
-    private static final int FORMAT_JALALI_DATE = 3;
 
     private boolean useTextFormat           = true;
     private boolean activeLongPressCopyText = false;
@@ -41,7 +37,7 @@ public class ZarinTextView extends android.support.v7.widget.AppCompatTextView {
         try {
             this.fontFace = array.getInt(R.styleable.ZarinTextView_zp_fontFace,
                     FontUtility.INDEX_IRANSANS_LIGHT);
-            this.textFormat = array.getInt(R.styleable.ZarinTextView_zp_textFormat, FORMAT_NORMAL);
+            this.textFormat = array.getInt(R.styleable.ZarinTextView_zp_textFormat, ZarinTextViewFormat.NORMAL);
             this.activeLongPressCopyText = array.getBoolean(
                     R.styleable.ZarinTextView_zp_longCopy, false);
         } finally {
@@ -150,7 +146,7 @@ public class ZarinTextView extends android.support.v7.widget.AppCompatTextView {
      *
      * @param textFormat format of text
      */
-    public void setTextFormat(int textFormat) {
+    public void setTextFormat(@ZarinTextViewFormat.TextViewFormat int textFormat) {
         this.textFormat = textFormat;
     }
 
@@ -158,11 +154,11 @@ public class ZarinTextView extends android.support.v7.widget.AppCompatTextView {
     @Override
     public void setText(CharSequence text, BufferType type) {
         if (this.useTextFormat) {
-            if (this.textFormat == FORMAT_CURRENCY) {
+            if (this.textFormat == ZarinTextViewFormat.CURRENCY) {
                 text = TextUtility.convertToCurrency(text.toString());
-            } else if (this.textFormat == FORMAT_PAN) {
+            } else if (this.textFormat == ZarinTextViewFormat.PAN) {
                 text = TextUtility.convertToPan(text.toString());
-            } else if (this.textFormat == FORMAT_JALALI_DATE) {
+            } else if (this.textFormat == ZarinTextViewFormat.JALALI_DATE) {
                 text = TextUtility.convertToJalaliDate(text.toString());
             }
         }
