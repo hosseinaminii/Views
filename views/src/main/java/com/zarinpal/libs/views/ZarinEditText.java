@@ -392,6 +392,33 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
         return value.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).+$");
     }
 
+    public Boolean isValidPanCard() {
+
+        String pan = this.getText().toString().trim();
+
+        pan = pan.replace("-", "");
+
+        if (!pan.matches("\\d+")) {
+            return false;
+        }
+
+        if (pan.length() != 16) {
+            return false;
+        }
+
+        char[] chars = pan.toCharArray();
+        int    sum   = 0;
+        for (int i = 0; i < chars.length; i++) {
+            int indexDigitPan = (((i + 1) % 2 == 0) ? Character.getNumericValue(chars[i]) : Character.getNumericValue(chars[i]) * 2);
+            sum += indexDigitPan > 9 ? indexDigitPan - 9 : indexDigitPan;
+        }
+        return (sum % 10) == 0;
+    }
+
+    public boolean isValidCVV() {
+        return getText().length() >= 3 && getText().length() <= 4;
+    }
+
 
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
