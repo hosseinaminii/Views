@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.view.ViewCompat;
 import android.text.Editable;
@@ -38,8 +39,9 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
 //    public static final int TYPE_CURRENCY = 0;
 //    public static final int TYPE_PAN      = 1;
 
-    private Context     context;
-    private FrameLayout frmLeftFirstIcon, frmLeftSecondIcon, frmRightIcon, frmArrow;
+    private Context              context;
+    private OnTextChangeListener onTextChangeListener;
+    private FrameLayout          frmLeftFirstIcon, frmLeftSecondIcon, frmRightIcon, frmArrow;
     private ImageView imgLeftFirstIcon, imgLeftSecondIcon, imgRightIcon;
     private MaterialEditText editText;
 
@@ -149,7 +151,7 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
         this.editText.setHint(this.hint);
 
         if (this.maxLines != 0) {
-            if(this.maxLines == 1) {
+            if (this.maxLines == 1) {
                 this.editText.setSingleLine();
             }
             this.editText.setMaxLines(this.maxLines);
@@ -176,10 +178,10 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
             this.editText.setCursorVisible(false);
         }
 
-        if(this.isArrowVisible && leftFirstIcon == null && leftSecondIcon == null) {
+        if (this.isArrowVisible && leftFirstIcon == null && leftSecondIcon == null) {
             frmArrow.setVisibility(VISIBLE);
             this.editText.setPadding(
-                    (int)UnitUtility.dpToPx(this.context, 24),
+                    (int) UnitUtility.dpToPx(this.context, 24),
                     this.editText.getPaddingTop(),
                     this.editText.getPaddingRight(),
                     this.editText.getPaddingBottom());
@@ -334,6 +336,11 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
         this.editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
     }
 
+    public void setOnTextChangeListener(@NonNull OnTextChangeListener onTextChangeListener) {
+        this.onTextChangeListener = onTextChangeListener;
+        this.editText.addTextChangedListener(this);
+    }
+
     public String getText() {
         return this.editText.getText().toString();
     }
@@ -426,13 +433,18 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
 
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
     }
 
     @Override
     public void afterTextChanged(Editable editable) {
 
         this.editText.removeTextChangedListener(this);
+
+        if (this.onTextChangeListener != null) {
+            this.onTextChangeListener.onTextChange(editable.toString());
+            this.editText.addTextChangedListener(this);
+            return;
+        }
 
         editable.replace(0, editable.length(),
                 editable.toString().replaceAll("[^\\d]", ""));
@@ -463,5 +475,9 @@ public class ZarinEditText extends RelativeLayout implements TextWatcher {
         }
 
         this.editText.addTextChangedListener(this);
+    }
+
+    public interface OnTextChangeListener {
+        void onTextChange(String val);
     }
 }
