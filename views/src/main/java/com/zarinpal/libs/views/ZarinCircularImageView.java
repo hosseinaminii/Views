@@ -27,6 +27,16 @@ public class ZarinCircularImageView extends CircularImageView {
         super(context, attrs, defStyle);
     }
 
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        this.removeBorder();
+    }
+
+    private void removeBorder() {
+        this.setBorderWidth(0.0f);
+    }
+
     public void loadImage(String URL) {
         try {
             Picasso.with(getContext()).load(URL).into(this);
