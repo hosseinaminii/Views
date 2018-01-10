@@ -27,7 +27,7 @@ android {
 }
 
 group = 'com.zarinpal'
-version = '0.1.3'
+version = '0.1.8'
 
 task generateSourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
@@ -62,10 +62,10 @@ bintray {
         userOrg = 'zarinpali'
 
         version {
-            name = '0.1.3'
+            name = '0.1.8'
             desc = 'Zarinpal Custom BottomSheet'
             released = new Date()
-            vcsTag = '0.1.3'
+            vcsTag = '0.1.8'
         }
 
         licenses = ['Apache-2.0']

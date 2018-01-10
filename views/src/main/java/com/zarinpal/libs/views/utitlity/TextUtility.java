@@ -125,6 +125,11 @@ public class TextUtility {
         }
     }
 
+    public static long getCurrencyValue(String text) {
+        String value = TextUtility.getRawValue(text, ",");
+        return Long.parseLong(value.replaceAll("\\D+", ""));
+    }
+
     public interface OnTextCopyListener {
         void onTextCopy();
     }

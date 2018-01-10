@@ -137,8 +137,8 @@ public class ZarinTextView extends android.support.v7.widget.AppCompatTextView {
      *
      * @return normal text
      */
-    public String getCurrencyValue() {
-        return TextUtility.getRawValue(getText().toString(), ",");
+    public long getCurrencyValue() {
+        return TextUtility.getCurrencyValue(getText().toString());
     }
 
     /**
