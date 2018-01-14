@@ -10,7 +10,9 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,15 +36,17 @@ import me.zhanghai.android.materialedittext.MaterialEditText;
 
 public class SectionEditText extends LinearLayout {
 
-    private ViewGroup layoutRoot;
-    private int itemCount;
-    private int maxLen;
-    private Integer itemWidth;
-    private Integer itemHeight;
-    private Integer itemMargin;
-    private boolean hasPassword;
-    private Drawable backgroundDrawable;
-    private Integer textColor;
+    public static final String TAG = SectionEditText.class.getSimpleName();
+
+    private ViewGroup      layoutRoot;
+    private int            itemCount;
+    private int            maxLen;
+    private Integer        itemWidth;
+    private Integer        itemHeight;
+    private Integer        itemMargin;
+    private boolean        hasPassword;
+    private Drawable       backgroundDrawable;
+    private Integer        textColor;
     private List<EditText> editTextList;
 
     public SectionEditText(Context context) {
@@ -84,10 +88,10 @@ public class SectionEditText extends LinearLayout {
             final int index = i;
             // initialize View Item
             RelativeLayout relativeLayout = new RelativeLayout(getContext());
-            final EditText edt = new EditText(getContext());
+            final EditText edt            = new EditText(getContext());
 //            final MaterialEditText edt = editText.getEditText();
             final ImageView imageView = new ImageView(getContext());
-            edt.setTypeface(FontUtility.getFont(getContext(),FontUtility.IRANSANS_BOLD));
+            edt.setTypeface(FontUtility.getFont(getContext(), FontUtility.IRANSANS_BOLD));
 
             // set (Max length , Color Hint , Gravity , TextColor , inputType,action keyboard) ->  To Edit Text
             this.setAttrEditText(edt, index);
@@ -104,7 +108,6 @@ public class SectionEditText extends LinearLayout {
             this.layoutRoot.addView(relativeLayout);
             this.editTextList.add(edt);
 
-
             // Check focus EditText for Visibility ImageView
             edt.setOnFocusChangeListener(new OnFocusChangeListener() {
                 @Override
@@ -116,6 +119,7 @@ public class SectionEditText extends LinearLayout {
                     }
                 }
             });
+
 
             // handled event type user
             edt.addTextChangedListener(new TextWatcher() {
@@ -130,7 +134,24 @@ public class SectionEditText extends LinearLayout {
                 @Override
                 public void afterTextChanged(Editable editable) {
 
+                    Log.i(TAG, "afterTextChanged: ");
                     handledUserType(editable.toString(), index);
+                }
+            });
+
+            edt.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+
+                    if (keyEvent.getAction() != KeyEvent.ACTION_DOWN) {
+                        return false;
+                    }
+                    if (keyCode == KeyEvent.KEYCODE_DEL) {
+                        if (edt.getText().toString().isEmpty() && (index != 0)) {
+                            getLastItem(index);
+                        }
+                    }
+                    return false;
                 }
             });
         }
@@ -141,7 +162,7 @@ public class SectionEditText extends LinearLayout {
 
         // check if user input empty And not first Item requested last Item focus
         if ((value.isEmpty()) && (index != 0)) {
-            editTextList.get((index - 1)).requestFocus();
+            this.getLastItem(index);
         }
 
         // check if user input empty Or  user input length fewer max Length return
@@ -151,8 +172,16 @@ public class SectionEditText extends LinearLayout {
 
         // check EditText ArrayList Size Bigger off (index + 1) requested next Item focus
         if (!(value.isEmpty()) && (editTextList.size() > (index + 1))) {
-            editTextList.get(index + 1).requestFocus();
+            this.getNextItem(index);
         }
+    }
+
+    private void getLastItem(int index) {
+        this.editTextList.get((index - 1)).requestFocus();
+    }
+
+    private void getNextItem(int index) {
+        editTextList.get(index + 1).requestFocus();
     }
 
     private LayoutParams getParam() {
