@@ -21,6 +21,7 @@
         app:zp_textFormat="currency" />
 
     <com.zarinpal.libs.views.ZarinButton
+        android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -30,8 +31,7 @@
         app:zp_firstColor="@color/colorAccent"
         app:zp_fontFace="iransans_bold"
         app:zp_pressColor="#0f0"
-        app:zp_rippleColor="#ff0"
-        app:zp_secondColor="@color/colorPrimary" />
+        app:zp_rippleColor="#ff0"/>
 
     <com.zarinpal.libs.views.ZarinEditText
         android:id="@+id/edt_zarin"

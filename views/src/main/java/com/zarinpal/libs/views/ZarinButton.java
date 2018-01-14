@@ -12,6 +12,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Build;
+import android.support.annotation.ColorInt;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -77,6 +78,14 @@ public class ZarinButton extends android.support.v7.widget.AppCompatButton {
         setBackgroundColor();
     }
 
+    public void setBackgroundColor(@ColorInt int... color) {
+        this.firstColor = color[0];
+        if(color.length == 2) {
+            this.secondColor = color[1];
+        }
+        setBackgroundColor();
+    }
+
     /**
      * Set font
      */
@@ -118,7 +127,9 @@ public class ZarinButton extends android.support.v7.widget.AppCompatButton {
                 new int[]{this.rippleColor});
 
         GradientDrawable defaultBg = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{this.firstColor, this.secondColor});
+                new int[]{this.firstColor,
+                        this.secondColor == ContextCompat.getColor(getContext(),
+                                R.color.button_default) ? this.firstColor : this.secondColor});
         defaultBg.setCornerRadius(this.cornerRadius);
 
         float[] outerRadii = new float[8];
@@ -138,7 +149,8 @@ public class ZarinButton extends android.support.v7.widget.AppCompatButton {
         StateListDrawable stateListDrawable = new StateListDrawable();
         GradientDrawable defaultBg =
                 new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{this.firstColor, this.secondColor});
+                new int[]{this.firstColor, this.secondColor == ContextCompat.getColor(getContext(),
+                        R.color.button_default) ? this.firstColor : this.secondColor});
         GradientDrawable pressBg =
                 new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
                         new int[]{this.pressColor, pressColor});
