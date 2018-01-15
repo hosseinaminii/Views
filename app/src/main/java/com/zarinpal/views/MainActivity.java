@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.zarinpal.libs.views.ZarinButton;
-import com.zarinpal.libs.views.ZarinProgressViewHorizontal;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,14 +19,6 @@ public class MainActivity extends AppCompatActivity {
         btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary),
                 getResources().getColor(R.color.colorAccent));
 
-
-        ZarinProgressViewHorizontal zarinProgress = findViewById(R.id.zarin_progress);
-        zarinProgress.startProgress(new ZarinProgressViewHorizontal.CounterProgressListener() {
-            @Override
-            public void onCounter(String time) {
-
-            }
-        });
 
     }
 

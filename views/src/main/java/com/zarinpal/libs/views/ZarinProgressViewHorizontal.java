@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -17,6 +18,8 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class ZarinProgressViewHorizontal extends LinearLayout {
+
+    public static final String TAG = ZarinProgressViewHorizontal.class.getSimpleName();
 
     private ProgressBar             progressView;
     private int                     time;
@@ -61,31 +64,37 @@ public class ZarinProgressViewHorizontal extends LinearLayout {
         this.time = timeSec;
     }
 
+    int millTime = 0;
+
     public void startProgress(final CounterProgressListener listener) {
 
         if (this.progressView == null) {
             return;
         }
 
+        millTime = this.time * 1000;
+
         this.listener = listener;
-        this.progressView.setMax(this.time);
+        this.progressView.setMax(millTime);
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    while (time >= 1) {
+                    while (counter <= millTime) {
                         progressView.post(new Runnable() {
                             @Override
                             public void run() {
                                 progressView.setProgress(counter);
                                 if (listener != null) {
-                                    listener.onCounter(formatsMilliSeconds(TimeUnit.SECONDS.toMillis(time)));
+                                    counter = counter + 100;
+                                    time = ((time - 100));
+                                    listener.onCounter(formatsMilliSeconds((time * -1)));
+
                                 }
+
                             }
                         });
-                        counter++;
-                        time--;
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     }
 
                 } catch (InterruptedException e) {
@@ -93,7 +102,6 @@ public class ZarinProgressViewHorizontal extends LinearLayout {
                 }
             }
         });
-
 
         thread.start();
     }
