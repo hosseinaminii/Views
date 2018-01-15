@@ -3,82 +3,87 @@
 
     <!--Popular attributes-->
     <attr name="zp_fontFace" format="enum">
-        <enum name="iran_sans_light" value="0"/>
-        <enum name="iransans_ulight" value="1"/>
-        <enum name="iransans_bold" value="2"/>
-        <enum name="ocra" value="3"/>
+        <enum name="iran_sans_light" value="0" />
+        <enum name="iransans_ulight" value="1" />
+        <enum name="iransans_bold" value="2" />
+        <enum name="ocra" value="3" />
     </attr>
     <attr name="zp_textFormat" format="enum">
-        <enum name="normal" value="0"/>
-        <enum name="pan" value="1"/>
-        <enum name="currency" value="2"/>
-        <enum name="jalali_date" value="3"/>
+        <enum name="normal" value="0" />
+        <enum name="pan" value="1" />
+        <enum name="currency" value="2" />
+        <enum name="jalali_date" value="3" />
     </attr>
 
 
     <declare-styleable name="ZarinTextView">
-        <attr name="zp_fontFace"/>
-        <attr name="zp_textFormat"/>
-        <attr name="zp_longCopy" format="boolean"/>
+        <attr name="zp_fontFace" />
+        <attr name="zp_textFormat" />
+        <attr name="zp_longCopy" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="ZarinButton">
-        <attr name="android:padding"/>
-        <attr name="zp_fontFace"/>
-        <attr name="zp_rippleColor" format="color"/>
-        <attr name="zp_firstColor" format="color"/>
-        <attr name="zp_secondColor" format="color"/>
-        <attr name="zp_cornerRadius" format="integer"/>
-        <attr name="zp_pressColor" format="color"/>
+        <attr name="android:padding" />
+        <attr name="zp_fontFace" />
+        <attr name="zp_rippleColor" format="color" />
+        <attr name="zp_firstColor" format="color" />
+        <attr name="zp_secondColor" format="color" />
+        <attr name="zp_cornerRadius" format="integer" />
+        <attr name="zp_pressColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="ZarinEditText">
-        <attr name="android:inputType"/>
-        <attr name="android:maxLength"/>
-        <attr name="android:textSize"/>
-        <attr name="android:hint"/>
-        <attr name="android:maxLines"/>
-        <attr name="android:gravity"/>
-        <attr name="android:textColor"/>
-        <attr name="android:text"/>
-        <attr name="android:textColorHint"/>
-        <attr name="zp_fontFace"/>
-        <attr name="zp_leftFirstIcon" format="integer"/>
-        <attr name="zp_leftSecondIcon" format="integer"/>
-        <attr name="zp_rightIcon" format="integer"/>
-        <attr name="zp_activeColor" format="integer"/>
-        <attr name="zp_tint_right_icon" format="color"/>
-        <attr name="zp_tint_left_first_icon" format="color"/>
-        <attr name="zp_tint_left_second_icon" format="color"/>
+        <attr name="android:inputType" />
+        <attr name="android:maxLength" />
+        <attr name="android:textSize" />
+        <attr name="android:hint" />
+        <attr name="android:maxLines" />
+        <attr name="android:gravity" />
+        <attr name="android:textColor" />
+        <attr name="android:text" />
+        <attr name="android:textColorHint" />
+        <attr name="zp_fontFace" />
+        <attr name="zp_leftFirstIcon" format="integer" />
+        <attr name="zp_leftSecondIcon" format="integer" />
+        <attr name="zp_rightIcon" format="integer" />
+        <attr name="zp_activeColor" format="integer" />
+        <attr name="zp_tint_right_icon" format="color" />
+        <attr name="zp_tint_left_first_icon" format="color" />
+        <attr name="zp_tint_left_second_icon" format="color" />
         <attr name="zp_padding_right_icon" format="dimension" />
         <attr name="zp_padding_left_first_icon" format="dimension" />
         <attr name="zp_padding_left_second_icon" format="dimension" />
-        <attr name="zp_is_clickable" format="boolean"/>
-        <attr name="zp_is_arrow_visible" format="boolean"/>
+        <attr name="zp_is_clickable" format="boolean" />
+        <attr name="zp_is_arrow_visible" format="boolean" />
         <attr name="zp_type" format="enum">
-            <enum name="currency" value="0"/>
-            <enum name="pan" value="1"/>
+            <enum name="currency" value="0" />
+            <enum name="pan" value="1" />
         </attr>
     </declare-styleable>
 
     <declare-styleable name="SectionEditText">
-        <attr name="zp_pinCount" format="integer"/>
-        <attr name="zp_widthItem" format="dimension"/>
-        <attr name="zp_heightItem" format="dimension"/>
-        <attr name="zp_hasPassword" format="boolean"/>
-        <attr name="zp_marginItem" format="dimension"/>
-        <attr name="android:maxLength"/>
-        <attr name="zp_backgroundDrawable" format="integer"/>
-        <attr name="android:textColor"/>
+        <attr name="zp_pinCount" format="integer" />
+        <attr name="zp_widthItem" format="dimension" />
+        <attr name="zp_heightItem" format="dimension" />
+        <attr name="zp_hasPassword" format="boolean" />
+        <attr name="zp_marginItem" format="dimension" />
+        <attr name="android:maxLength" />
+        <attr name="zp_backgroundDrawable" format="integer" />
+        <attr name="android:textColor" />
     </declare-styleable>
 
     <declare-styleable name="ZarinPanTextView">
-        <attr name="zp_backgroundNumber" format="integer"/>
-        <attr name="android:textColor"/>
-        <attr name="zp_textSize" format="dimension"/>
-        <attr name="zp_fontFace"/>
-        <attr name="zp_setCardNumber" format="string"/>
-        <attr name="zp_margin_item" format="dimension"/>
+        <attr name="zp_backgroundNumber" format="integer" />
+        <attr name="android:textColor" />
+        <attr name="zp_textSize" format="dimension" />
+        <attr name="zp_fontFace" />
+        <attr name="zp_setCardNumber" format="string" />
+        <attr name="zp_margin_item" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="ZarinProgressViewHorizontal">
+        <attr name="zp_time" format="integer" />
+        <attr name="zp_resource" format="integer" />
     </declare-styleable>
 
 
