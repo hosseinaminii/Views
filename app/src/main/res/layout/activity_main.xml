@@ -20,6 +20,12 @@
         app:zp_fontFace="iran_sans_light"
         app:zp_textFormat="currency" />
 
+    <com.zarinpal.libs.views.ZarinProgressViewHorizontal
+        android:id="@+id/zarin_progress"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginBottom="10dp" />
+
     <com.zarinpal.libs.views.ZarinButton
         android:id="@+id/btn"
         android:layout_width="wrap_content"
@@ -31,7 +37,7 @@
         app:zp_firstColor="@color/colorAccent"
         app:zp_fontFace="iransans_bold"
         app:zp_pressColor="#0f0"
-        app:zp_rippleColor="#ff0"/>
+        app:zp_rippleColor="#ff0" />
 
     <com.zarinpal.libs.views.ZarinEditText
         android:id="@+id/edt_zarin"
