@@ -90,19 +90,15 @@ public class ZarinPanTextView extends LinearLayout {
         if (str == null) {
             return;
         }
-        if (str.length() != 19) {
-            return;
-        }
-        if (!str.contains("-")) {
+        if (str.length() != 16) {
             return;
         }
 
         this.cardStr = str;
-        String[] cardNumberSlice = this.cardStr.split("-");
-        this.txtSliceOne.setText(cardNumberSlice[0]);
-        this.txtSliceTwo.setText(cardNumberSlice[1]);
-        this.txtSliceThree.setText(cardNumberSlice[2]);
-        this.txtSliceFour.setText(cardNumberSlice[3]);
+        this.txtSliceOne.setText(this.cardStr.substring(0 , 4));
+        this.txtSliceTwo.setText(this.cardStr.substring(4 , 8));
+        this.txtSliceThree.setText(this.cardStr.substring(8 , 12));
+        this.txtSliceFour.setText(this.cardStr.substring(12 , 16));
     }
 
 
