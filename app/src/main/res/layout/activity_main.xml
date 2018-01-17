@@ -82,7 +82,7 @@
         app:zp_backgroundNumber="@drawable/bg_pan"
         app:zp_fontFace="iransans_bold"
         app:zp_margin_item="5dp"
-        app:zp_setCardNumber="8237-8238-4861-8461"
+        app:zp_setCardNumber="639607******2706"
         app:zp_textSize="13sp" />
 
     <LinearLayout
