@@ -116,10 +116,13 @@ public class SectionEditText extends LinearLayout {
                 public void onFocusChange(View view, boolean isFocused) {
                     if (backgroundDrawable != null && isFocused) {
                         imageView.setVisibility(GONE);
-                        if (getText().isEmpty()) {
-                            editTextList.get(0).requestFocus();
+                        if (!getText().isEmpty()) {
+                            return;
                         }
-                    } else if (edt.getText().toString().isEmpty()) {
+                        editTextList.get(0).requestFocus();
+                        return;
+                    }
+                    if (edt.getText().toString().isEmpty()) {
                         imageView.setVisibility(VISIBLE);
                     }
                 }
