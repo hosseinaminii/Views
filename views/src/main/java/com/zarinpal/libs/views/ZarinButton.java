@@ -78,7 +78,7 @@ public class ZarinButton extends android.support.v7.widget.AppCompatButton {
         setBackgroundColor();
     }
 
-    public void setBackgroundColor(@ColorInt int... color) {
+    public void setBackgroundColors(@ColorInt int... color) {
         this.firstColor = color[0];
         if(color.length == 2) {
             this.secondColor = color[1];
