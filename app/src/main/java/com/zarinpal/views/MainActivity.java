@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
         ZarinButton btn = findViewById(R.id.btn);
 
-        btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary),
+        btn.setBackgroundColors(getResources().getColor(R.color.colorPrimary),
                 getResources().getColor(R.color.colorAccent));
 
 
