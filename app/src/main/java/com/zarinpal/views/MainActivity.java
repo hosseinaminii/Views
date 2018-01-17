@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
         btn.setBackgroundColors(getResources().getColor(R.color.colorPrimary),
                 getResources().getColor(R.color.colorAccent));
 
-
     }
 
 }

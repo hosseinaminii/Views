@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -38,16 +39,17 @@ public class SectionEditText extends LinearLayout {
 
     public static final String TAG = SectionEditText.class.getSimpleName();
 
-    private ViewGroup      layoutRoot;
-    private int            itemCount;
-    private int            maxLen;
-    private Integer        itemWidth;
-    private Integer        itemHeight;
-    private Integer        itemMargin;
-    private boolean        hasPassword;
-    private Drawable       backgroundDrawable;
-    private Integer        textColor;
-    private List<EditText> editTextList;
+    private ViewGroup          layoutRoot;
+    private int                itemCount;
+    private int                maxLen;
+    private Integer            itemWidth;
+    private Integer            itemHeight;
+    private Integer            itemMargin;
+    private boolean            hasPassword;
+    private Drawable           backgroundDrawable;
+    private Integer            textColor;
+    private List<EditText>     editTextList;
+    private OnCompleteListener listener;
 
     public SectionEditText(Context context) {
         super(context);
@@ -114,6 +116,9 @@ public class SectionEditText extends LinearLayout {
                 public void onFocusChange(View view, boolean isFocused) {
                     if (backgroundDrawable != null && isFocused) {
                         imageView.setVisibility(GONE);
+                        if (getText().isEmpty()) {
+                            editTextList.get(0).requestFocus();
+                        }
                     } else if (edt.getText().toString().isEmpty()) {
                         imageView.setVisibility(VISIBLE);
                     }
@@ -134,7 +139,6 @@ public class SectionEditText extends LinearLayout {
                 @Override
                 public void afterTextChanged(Editable editable) {
 
-                    Log.i(TAG, "afterTextChanged: ");
                     handledUserType(editable.toString(), index);
                 }
             });
@@ -159,6 +163,12 @@ public class SectionEditText extends LinearLayout {
 
     private void handledUserType(String value, int index) {
 
+        if ((!value.isEmpty()) && (index + 1 == editTextList.size())) {
+            if (this.listener != null) {
+                this.listener.onComplete(getText());
+            }
+
+        }
 
         // check if user input empty And not first Item requested last Item focus
         if ((value.isEmpty()) && (index != 0)) {
@@ -174,6 +184,7 @@ public class SectionEditText extends LinearLayout {
         if (!(value.isEmpty()) && (editTextList.size() > (index + 1))) {
             this.getNextItem(index);
         }
+
     }
 
     private void getLastItem(int index) {
@@ -246,5 +257,13 @@ public class SectionEditText extends LinearLayout {
         }
 
         return str;
+    }
+
+    public void setListener(OnCompleteListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnCompleteListener {
+        void onComplete(String value);
     }
 }
