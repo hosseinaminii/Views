@@ -27,7 +27,7 @@ android {
 }
 
 group = 'com.zarinpal'
-version = '0.2.4'
+version = '0.2.5'
 
 task generateSourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
@@ -62,10 +62,10 @@ bintray {
         userOrg = 'zarinpali'
 
         version {
-            name = '0.2.4'
+            name = '0.2.5'
             desc = 'Zarinpal Custom BottomSheet'
             released = new Date()
-            vcsTag = '0.2.4'
+            vcsTag = '0.2.5'
         }
 
         licenses = ['Apache-2.0']
@@ -89,3 +89,4 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:support-annotations:27.0.2'
 }
+
