@@ -69,7 +69,8 @@ public class ZarinPinView extends EditText {
     protected boolean mAnimate  = false;
     protected boolean mHasError = false;
     protected ColorStateList mOriginalTextColors;
-    private int fontFace;
+    private   int            fontFace;
+    private   int            activeColor;
     protected int[][] mStates = new int[][]{
             new int[]{android.R.attr.state_selected}, // selected
             new int[]{android.R.attr.state_active}, // error
@@ -126,48 +127,54 @@ public class ZarinPinView extends EditText {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ZarinPinView, 0, 0);
         try {
             TypedValue outValue = new TypedValue();
-            ta.getValue(R.styleable.ZarinPinView_pinAnimationType, outValue);
-            mAnimatedType = outValue.data;
-            mMask = ta.getString(R.styleable.ZarinPinView_pinCharacterMask);
+            ta.getValue(R.styleable.ZarinPinView_zp_pinAnimationType, outValue);
+            this.mAnimatedType = outValue.data;
+            this.mMask = ta.getString(R.styleable.ZarinPinView_zp_pinCharacterMask);
             this.fontFace = ta.getInt(R.styleable.ZarinPinView_zp_fontFace,
                     FontUtility.INDEX_IRANSANS_LIGHT);
-            mSingleCharHint = ta.getString(R.styleable.ZarinPinView_pinRepeatedHint);
-            mLineStroke = ta.getDimension(R.styleable.ZarinPinView_pinLineStroke, mLineStroke);
-            mLineStrokeSelected = ta.getDimension(R.styleable.ZarinPinView_pinLineStrokeSelected, mLineStrokeSelected);
-            mSpace = ta.getDimension(R.styleable.ZarinPinView_pinCharacterSpacing, mSpace);
-            mTextBottomPadding = ta.getDimension(R.styleable.ZarinPinView_pinTextBottomPadding, mTextBottomPadding);
-            mIsDigitSquare = ta.getBoolean(R.styleable.ZarinPinView_pinBackgroundIsSquare, mIsDigitSquare);
-            mPinBackground = ta.getDrawable(R.styleable.ZarinPinView_pinBackgroundDrawable);
-            ColorStateList colors = ta.getColorStateList(R.styleable.ZarinPinView_pinLineColors);
+            this.mSingleCharHint = ta.getString(R.styleable.ZarinPinView_zp_pinRepeatedHint);
+            this.mLineStroke = ta.getDimension(R.styleable.ZarinPinView_zp_pinLineStroke, mLineStroke);
+            this.mLineStrokeSelected = ta.getDimension(R.styleable.ZarinPinView_zp_pinLineStrokeSelected, mLineStrokeSelected);
+            this.mSpace = ta.getDimension(R.styleable.ZarinPinView_zp_pinCharacterSpacing, mSpace);
+            this.mTextBottomPadding = ta.getDimension(R.styleable.ZarinPinView_zp_pinTextBottomPadding, mTextBottomPadding);
+            this.mIsDigitSquare = ta.getBoolean(R.styleable.ZarinPinView_zp_pinBackgroundIsSquare, mIsDigitSquare);
+            this.mPinBackground = ta.getDrawable(R.styleable.ZarinPinView_zp_pinBackgroundDrawable);
+            ColorStateList colors = ta.getColorStateList(R.styleable.ZarinPinView_zp_pinLineColors);
+            this.activeColor = ta.getColor(R.styleable.ZarinPinView_zp_activeColor, Color.GRAY);
+
             if (colors != null) {
-                mColorStates = colors;
+                this.mColorStates = colors;
             }
+
+
         } finally {
             ta.recycle();
         }
 
-        mCharPaint = new Paint(getPaint());
-        mLastCharPaint = new Paint(getPaint());
-        mSingleCharPaint = new Paint(getPaint());
-        mLinesPaint = new Paint(getPaint());
-        mLinesPaint.setStrokeWidth(mLineStroke);
+        setFontFace();
+
+        this.mCharPaint = new Paint(getPaint());
+        this.mLastCharPaint = new Paint(getPaint());
+        this.mSingleCharPaint = new Paint(getPaint());
+        this.mLinesPaint = new Paint(getPaint());
+        this.mLinesPaint.setStrokeWidth(mLineStroke);
 
         TypedValue outValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorControlActivated,
                 outValue, true);
         int colorSelected = outValue.data;
-        mColors[0] = colorSelected;
+        this.mColors[0] = colorSelected;
 
         int colorFocused = isInEditMode() ? Color.GRAY : ContextCompat.getColor(context, R.color.pin_normal);
-        mColors[1] = colorFocused;
+        this.mColors[1] = colorFocused;
 
         int colorUnfocused = isInEditMode() ? Color.GRAY : ContextCompat.getColor(context, R.color.pin_normal);
-        mColors[2] = colorUnfocused;
+        this.mColors[2] = colorUnfocused;
 
         setBackgroundResource(0);
 
-        mMaxLength = attrs.getAttributeIntValue(XML_NAMESPACE_ANDROID, "maxLength", 4);
-        mNumChars = mMaxLength;
+        this.mMaxLength = attrs.getAttributeIntValue(XML_NAMESPACE_ANDROID, "maxLength", 4);
+        this.mNumChars = mMaxLength;
 
         //Disable copy paste
         super.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
@@ -361,11 +368,14 @@ public class ZarinPinView extends EditText {
             mLinesPaint.setColor(getColorForState(android.R.attr.state_focused));
             if (hasTextOrIsNext) {
                 mLinesPaint.setColor(getColorForState(android.R.attr.state_selected));
+                mLinesPaint.setColor(this.activeColor);
             }
+
         } else {
             mLinesPaint.setStrokeWidth(mLineStroke);
             mLinesPaint.setColor(getColorForState(-android.R.attr.state_focused));
         }
+
     }
 
     protected void updateDrawableState(boolean hasText, boolean isNext) {

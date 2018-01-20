@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#f00</color>
 
-    <color name="pin_normal">#6B767E</color>
+    <color name="normal">#0f87de</color>
 
 </resources>

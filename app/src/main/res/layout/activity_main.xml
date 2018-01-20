@@ -68,8 +68,9 @@
         android:maxLength="6"
         android:textIsSelectable="false"
         android:textSize="16sp"
-        app:pinBackgroundIsSquare="true"
-        app:pinLineStroke="2dp">
+        app:zp_activeColor="@color/normal"
+        app:zp_pinBackgroundIsSquare="true"
+        app:zp_pinLineStroke="2dp">
 
     </com.zarinpal.libs.views.ZarinPinView>
 
