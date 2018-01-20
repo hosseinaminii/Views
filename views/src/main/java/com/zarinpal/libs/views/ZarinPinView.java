@@ -30,6 +30,8 @@ import android.view.animation.OvershootInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.zarinpal.libs.views.utitlity.FontUtility;
+
 import java.util.Locale;
 
 /**
@@ -67,6 +69,7 @@ public class ZarinPinView extends EditText {
     protected boolean mAnimate  = false;
     protected boolean mHasError = false;
     protected ColorStateList mOriginalTextColors;
+    private int fontFace;
     protected int[][] mStates = new int[][]{
             new int[]{android.R.attr.state_selected}, // selected
             new int[]{android.R.attr.state_active}, // error
@@ -126,6 +129,8 @@ public class ZarinPinView extends EditText {
             ta.getValue(R.styleable.ZarinPinView_pinAnimationType, outValue);
             mAnimatedType = outValue.data;
             mMask = ta.getString(R.styleable.ZarinPinView_pinCharacterMask);
+            this.fontFace = ta.getInt(R.styleable.ZarinPinView_zp_fontFace,
+                    FontUtility.INDEX_IRANSANS_LIGHT);
             mSingleCharHint = ta.getString(R.styleable.ZarinPinView_pinRepeatedHint);
             mLineStroke = ta.getDimension(R.styleable.ZarinPinView_pinLineStroke, mLineStroke);
             mLineStrokeSelected = ta.getDimension(R.styleable.ZarinPinView_pinLineStrokeSelected, mLineStrokeSelected);
@@ -506,6 +511,30 @@ public class ZarinPinView extends EditText {
         }
         set.playTogether(animUp, animAlpha);
         set.start();
+    }
+
+    /**
+     * Change font
+     */
+    private void setFontFace() {
+        String fontFamily = FontUtility.IRANSANS_LIGHT;
+
+        switch (fontFace) {
+            case FontUtility.INDEX_IRANSANS_ULIGHT: {
+                fontFamily = FontUtility.IRANSANS_ULIGHT;
+                break;
+            }
+            case FontUtility.INDEX_IRANSANS_BOLD: {
+                fontFamily = FontUtility.IRANSANS_BOLD;
+                break;
+            }
+            case FontUtility.INDEX_OCRA: {
+                fontFamily = FontUtility.OCRA;
+                break;
+            }
+        }
+
+        setTypeface(FontUtility.getFont(getContext(), fontFamily));
     }
 
     public void setAnimateText(boolean animate) {
