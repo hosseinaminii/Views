@@ -25,17 +25,18 @@ import com.zarinpal.libs.views.utitlity.UnitUtility;
 public class ZarinPanTextView extends LinearLayout {
 
     private TextView txtSliceOne, txtSliceTwo, txtSliceThree, txtSliceFour;
+    private LinearLayout layout_one, layout_two, layout_three, layout_four;
 
-    private static final int IRANSANS_LIGHT = 0;
+    private static final int IRANSANS_LIGHT  = 0;
     private static final int IRANSANS_ULIGHT = 1;
-    private static final int IRANSANS_BOLD = 2;
-    private static final int OCRA = 3;
+    private static final int IRANSANS_BOLD   = 2;
+    private static final int OCRA            = 3;
 
-    private int fontFace;
-    private String cardStr;
+    private int      fontFace;
+    private String   cardStr;
     private Drawable backgroundDrawable;
-    private float textSize;
-    private float marginItem;
+    private float    textSize;
+    private float    marginItem;
 
     private Integer textColor;
 
@@ -75,10 +76,15 @@ public class ZarinPanTextView extends LinearLayout {
         this.txtSliceThree = view.findViewById(R.id.txt_slice_three);
         this.txtSliceFour = view.findViewById(R.id.txt_slice_four);
 
-        this.txtSliceOne.setBackground(this.backgroundDrawable);
-        this.txtSliceTwo.setBackground(this.backgroundDrawable);
-        this.txtSliceThree.setBackground(this.backgroundDrawable);
-        this.txtSliceFour.setBackground(this.backgroundDrawable);
+        this.layout_one = view.findViewById(R.id.layout_one);
+        this.layout_two = view.findViewById(R.id.layout_two);
+        this.layout_three = view.findViewById(R.id.layout_three);
+        this.layout_four = view.findViewById(R.id.layout_four);
+
+        this.layout_one.setBackground(this.backgroundDrawable);
+        this.layout_two.setBackground(this.backgroundDrawable);
+        this.layout_three.setBackground(this.backgroundDrawable);
+        this.layout_four.setBackground(this.backgroundDrawable);
 
         setFont();
         setText(cardStr);
@@ -95,10 +101,10 @@ public class ZarinPanTextView extends LinearLayout {
         }
 
         this.cardStr = str;
-        this.txtSliceOne.setText(this.cardStr.substring(0 , 4));
-        this.txtSliceTwo.setText(this.cardStr.substring(4 , 8));
-        this.txtSliceThree.setText(this.cardStr.substring(8 , 12));
-        this.txtSliceFour.setText(this.cardStr.substring(12 , 16));
+        this.txtSliceOne.setText(this.cardStr.substring(0, 4));
+        this.txtSliceTwo.setText(this.cardStr.substring(4, 8));
+        this.txtSliceThree.setText(this.cardStr.substring(8, 12));
+        this.txtSliceFour.setText(this.cardStr.substring(12, 16));
     }
 
 
@@ -138,10 +144,10 @@ public class ZarinPanTextView extends LinearLayout {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT
                 , ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setMargins(margin, margin, margin, margin);
-        this.txtSliceOne.setLayoutParams(params);
-        this.txtSliceTwo.setLayoutParams(params);
-        this.txtSliceThree.setLayoutParams(params);
-        this.txtSliceFour.setLayoutParams(params);
+        this.layout_one.setLayoutParams(params);
+        this.layout_two.setLayoutParams(params);
+        this.layout_three.setLayoutParams(params);
+        this.layout_four.setLayoutParams(params);
 
         // set text color
         this.txtSliceOne.setTextColor(this.textColor);

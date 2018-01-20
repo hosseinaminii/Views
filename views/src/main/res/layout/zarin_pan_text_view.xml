@@ -10,37 +10,62 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/txt_slice_one"
+        <LinearLayout
+            android:id="@+id/layout_one"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/color_pan_number"
-            android:textSize="12sp" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/txt_slice_two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/color_pan_number"
-            android:textSize="12sp" />
+            <TextView
+                android:id="@+id/txt_slice_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/color_pan_number"
+                android:textSize="12sp" />
 
-        <TextView
-            android:id="@+id/txt_slice_three"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/color_pan_number"
-            android:textSize="12sp" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/txt_slice_four"
+        <LinearLayout
+            android:id="@+id/layout_two"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/color_pan_number"
-            android:textSize="12sp" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_slice_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/color_pan_number"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_slice_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/color_pan_number"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_slice_four"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/color_pan_number"
+                android:textSize="12sp" />
+        </LinearLayout>
 
     </LinearLayout>
 
