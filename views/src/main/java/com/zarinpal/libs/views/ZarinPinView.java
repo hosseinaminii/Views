@@ -96,11 +96,13 @@ public class ZarinPinView extends EditText {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public ZarinPinView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }
+
     public void setMaxLength(final int maxLength) {
         mMaxLength = maxLength;
         mNumChars = maxLength;

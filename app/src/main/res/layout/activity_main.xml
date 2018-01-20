@@ -58,18 +58,18 @@
         android:layout_height="wrap_content" />
 
     <com.zarinpal.libs.views.ZarinPinView
-        android:id="@+id/txt_pin_entry"
-        android:layout_width="match_parent"
+        android:id="@+id/zarin_pin"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:background="@null"
         android:cursorVisible="false"
         android:digits="1234567890"
         android:inputType="number"
-        android:maxLength="4"
+        android:maxLength="6"
         android:textIsSelectable="false"
-        android:textSize="20sp"
-        android:visibility="visible"
-        app:pinLineColors="#34495e">
+        android:textSize="16sp"
+        app:pinBackgroundIsSquare="true"
+        app:pinLineStroke="2dp">
 
     </com.zarinpal.libs.views.ZarinPinView>
 
@@ -81,7 +81,6 @@
         android:inputType="numberPassword"
         android:maxLength="1"
         android:textColor="#484848"
-        app:zp_backgroundDrawable="@drawable/dash_drawable"
         app:zp_heightItem="30dp"
         app:zp_marginItem="5dp"
         app:zp_pinCount="6"
@@ -94,7 +93,6 @@
         android:gravity="center"
         android:padding="10dp"
         android:textColor="#484848"
-        app:zp_backgroundNumber="@drawable/bg_pan"
         app:zp_fontFace="iransans_bold"
         app:zp_margin_item="5dp"
         app:zp_setCardNumber="639607******2706"

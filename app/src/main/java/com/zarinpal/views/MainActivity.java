@@ -2,8 +2,10 @@ package com.zarinpal.views;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.zarinpal.libs.views.ZarinButton;
+import com.zarinpal.libs.views.ZarinPinView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +20,14 @@ public class MainActivity extends AppCompatActivity {
 
         btn.setBackgroundColors(getResources().getColor(R.color.colorPrimary),
                 getResources().getColor(R.color.colorAccent));
+
+        ZarinPinView zarin_pin = findViewById(R.id.zarin_pin);
+        zarin_pin.setOnPinEnteredListener(new ZarinPinView.OnPinEnteredListener() {
+            @Override
+            public void onPinEntered(CharSequence str) {
+                Log.i(TAG, "onPinEntered: "+str);
+            }
+        });
 
 
     }
