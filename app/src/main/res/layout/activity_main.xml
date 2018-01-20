@@ -57,6 +57,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <com.zarinpal.libs.views.ZarinPinView
+        android:id="@+id/txt_pin_entry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:cursorVisible="false"
+        android:digits="1234567890"
+        android:inputType="number"
+        android:maxLength="4"
+        android:textIsSelectable="false"
+        android:textSize="20sp"
+        android:visibility="visible"
+        app:pinLineColors="#34495e">
+
+    </com.zarinpal.libs.views.ZarinPinView>
+
     <com.zarinpal.libs.views.SectionEditText
         android:id="@+id/edt_password"
         android:layout_width="match_parent"
