@@ -10,7 +10,6 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -81,10 +80,11 @@ public class ZarinPanTextView extends LinearLayout {
         this.layout_three = view.findViewById(R.id.layout_three);
         this.layout_four = view.findViewById(R.id.layout_four);
 
-        this.layout_one.setBackground(this.backgroundDrawable);
-        this.layout_two.setBackground(this.backgroundDrawable);
-        this.layout_three.setBackground(this.backgroundDrawable);
-        this.layout_four.setBackground(this.backgroundDrawable);
+        // TODO : CHeck Problem
+//        this.layout_one.setBackground(this.backgroundDrawable);
+//        this.layout_two.setBackground(this.backgroundDrawable);
+//        this.layout_three.setBackground(this.backgroundDrawable);
+//        this.layout_four.setBackground(this.backgroundDrawable);
 
         setFont();
         setText(cardStr);
@@ -100,11 +100,11 @@ public class ZarinPanTextView extends LinearLayout {
             return;
         }
 
-        this.cardStr = str;
-        this.txtSliceOne.setText(this.cardStr.substring(0, 4));
-        this.txtSliceTwo.setText(this.cardStr.substring(4, 8));
-        this.txtSliceThree.setText(this.cardStr.substring(8, 12));
-        this.txtSliceFour.setText(this.cardStr.substring(12, 16));
+        this.cardStr = str.trim();
+        this.txtSliceOne.setText(this.cardStr.substring(0, 4).trim());
+        this.txtSliceTwo.setText(this.cardStr.substring(4, 8).trim());
+        this.txtSliceThree.setText(this.cardStr.substring(8, 12).trim());
+        this.txtSliceFour.setText(this.cardStr.substring(12, 16).trim());
     }
 
 
@@ -139,15 +139,17 @@ public class ZarinPanTextView extends LinearLayout {
         this.txtSliceThree.setTextSize(this.textSize);
         this.txtSliceFour.setTextSize(this.textSize);
 
+
+        // TODO : Check Problem
 //        // set margin
-        int margin = (int) UnitUtility.pxToDp(this.marginItem, getContext());
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT
-                , ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.setMargins(margin, margin, margin, margin);
-        this.layout_one.setLayoutParams(params);
-        this.layout_two.setLayoutParams(params);
-        this.layout_three.setLayoutParams(params);
-        this.layout_four.setLayoutParams(params);
+//        int margin = (int) UnitUtility.pxToDp(this.marginItem, getContext());
+//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT
+//                , ViewGroup.LayoutParams.WRAP_CONTENT);
+//        params.setMargins(margin, margin, margin, margin);
+//        this.layout_one.setLayoutParams(params);
+//        this.layout_two.setLayoutParams(params);
+//        this.layout_three.setLayoutParams(params);
+//        this.layout_four.setLayoutParams(params);
 
         // set text color
         this.txtSliceOne.setTextColor(this.textColor);
