@@ -106,6 +106,8 @@
     </declare-styleable>
 
     <declare-styleable name="ZarinItemView">
+        <attr name="zp_rotateLeftIcon" format="integer" />
+        <attr name="zp_rotateRightIcon" format="integer" />
         <attr name="zp_bgColor" format="color" />
         <attr name="android:textColor" />
         <attr name="zp_titleSize" format="dimension" />

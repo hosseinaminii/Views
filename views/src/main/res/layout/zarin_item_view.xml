@@ -46,8 +46,8 @@
 
                 <com.zarinpal.libs.views.ZarinImageView
                     android:id="@+id/img_icon_right"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
         </LinearLayout>

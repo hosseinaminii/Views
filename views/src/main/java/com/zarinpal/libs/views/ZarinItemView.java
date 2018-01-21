@@ -1,10 +1,15 @@
 package com.zarinpal.libs.views;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
+import android.os.Handler;
+import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -13,6 +18,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.zarinpal.libs.views.utitlity.FontUtility;
@@ -29,19 +35,21 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
     private CardView            cardView;
     private OnClickItemListener listener;
 
-    private int     bgIconRight;
-    private int     fontFace;
-    private Integer iconRight;
-    private Integer iconLeft;
-    private float   textSize;
-    private String  title;
     private Integer iconRightPadding;
     private Integer iconLeftPadding;
+    private Integer iconRight;
+    private Integer iconLeft;
+    private String  title;
+    private boolean hasActive;
+    private float   textSize;
+    private int     bgIconRight;
+    private int     fontFace;
     private int     bgColor;
     private int     textColor;
     private int     iconRightTint;
     private int     iconLeftTint;
-    private boolean hasActive;
+    private int     rotateLeftIcon;
+    private int     rotateRightIcon;
 
     public ZarinItemView(Context context) {
         super(context);
@@ -74,6 +82,8 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
             this.iconLeftTint = typedArray.getColor(R.styleable.ZarinItemView_zp_tintLeftColor, Color.TRANSPARENT);
             this.iconRightTint = typedArray.getColor(R.styleable.ZarinItemView_zp_tintRightColor, Color.TRANSPARENT);
             this.hasActive = typedArray.getBoolean(R.styleable.ZarinItemView_zp_hasActive, true);
+            this.rotateLeftIcon = typedArray.getInt(R.styleable.ZarinItemView_zp_rotateLeftIcon, 0);
+            this.rotateRightIcon = typedArray.getInt(R.styleable.ZarinItemView_zp_rotateRightIcon, 0);
         } finally {
             typedArray.recycle();
         }
@@ -86,26 +96,11 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
         this.imgIconLeft = view.findViewById(R.id.img_icon_left);
         this.imgIconRight = view.findViewById(R.id.img_icon_right);
         this.txtTitle = view.findViewById(R.id.txt_title);
-
-        this.cardView.setCardBackgroundColor(this.bgColor);
-        this.imgIconRight.setPadding(this.iconRightPadding, this.iconRightPadding, this.iconRightPadding, this.iconRightPadding);
-        this.imgIconLeft.setPadding(this.iconLeftPadding, this.iconLeftPadding, this.iconLeftPadding, this.iconLeftPadding);
-        this.txtTitle.setTextColor(this.textColor);
-        this.imgIconLeft.setTintColor(this.iconLeftTint);
-        this.imgIconRight.setTintColor(this.iconRightTint);
-
-        this.setIconBg(this.bgIconRight);
-        this.setIconLeft(this.iconLeft);
-        this.setIconRight(this.iconRight);
-        this.setTitle(this.title);
-        this.setTextSize(this.textSize);
-        this.setFontFace();
-        this.setEnabled(this.hasActive);
-
         this.cardView.setOnClickListener(this);
-
+        this.updateView();
 
     }
+
 
     public void setIconRight(@DrawableRes int value) {
         if (this.imgIconRight == null) {
@@ -168,17 +163,68 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
         this.listener = listener;
     }
 
+    public ZarinImageView getImageViewRight() {
+        return this.imgIconRight;
+    }
+
+    public ZarinImageView getImageViewLeft() {
+        return this.imgIconLeft;
+    }
+
+    public ViewGroup getLayoutIconRight() {
+        return this.layoutIconRight;
+    }
+
+    public void setTintRightIcon(@ColorInt int color) {
+        if (this.imgIconRight == null) {
+            return;
+        }
+        this.imgIconRight.setTintColor(color);
+    }
+
+    public void setTintLeftIcon(@ColorInt int color) {
+        if (this.imgIconLeft == null) {
+            return;
+        }
+        this.imgIconLeft.setTintColor(color);
+    }
 
     @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
         cardView.setEnabled(enabled);
         if (enabled) {
+            this.setViewDisableColor();
             return;
         }
+        this.updateView();
+    }
+
+    private void setViewDisableColor() {
+        this.layoutIconRight.setBackground(null);
         this.imgIconRight.setTintColor(ContextCompat.getColor(getContext(), R.color.disable_color));
-        this.imgIconLeft.setTintColor(ContextCompat.getColor(getContext(), R.color.disable_color));
         this.txtTitle.setTextColor(ContextCompat.getColor(getContext(), R.color.disable_color));
+    }
+
+    private void updateView() {
+
+        this.cardView.setCardBackgroundColor(this.bgColor);
+        this.imgIconRight.setPadding(this.iconRightPadding, this.iconRightPadding, this.iconRightPadding, this.iconRightPadding);
+        this.imgIconLeft.setPadding(this.iconLeftPadding, this.iconLeftPadding, this.iconLeftPadding, this.iconLeftPadding);
+        this.txtTitle.setTextColor(this.textColor);
+        this.imgIconLeft.setTintColor(this.iconLeftTint);
+        this.imgIconRight.setTintColor(this.iconRightTint);
+        this.imgIconRight.setRotation(this.rotateRightIcon);
+        this.imgIconLeft.setRotation(this.rotateLeftIcon);
+
+        this.setIconBg(this.bgIconRight);
+        this.setIconLeft(this.iconLeft);
+        this.setIconRight(this.iconRight);
+        this.setTitle(this.title);
+        this.setTextSize(this.textSize);
+        this.setFontFace();
+        this.setEnabled(this.hasActive);
+
 
     }
 
@@ -211,6 +257,41 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
         }
 
         this.txtTitle.setTypeface(FontUtility.getFont(getContext(), fontFamily));
+    }
+
+    public void setAnimationColorsItem(final int[] colors, final int lastColor) {
+
+        if (!cardView.isEnabled()) {
+            setViewDisableColor();
+            return;
+        }
+
+        final ShapeDrawable oval = new ShapeDrawable(new OvalShape());
+        oval.setIntrinsicHeight(200);
+        oval.setIntrinsicWidth(200);
+        oval.setAlpha(30);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ValueAnimator valueAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), lastColor, colors[1]);
+                valueAnimator.setDuration(500);
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+
+                        oval.getPaint().setColor((int) valueAnimator.getAnimatedValue());
+                        //set background oval
+                        layoutIconRight.setBackground(oval);
+                        // set tint color icons
+                        imgIconRight.setColorFilter((int) valueAnimator.getAnimatedValue());
+                        txtTitle.setTextColor(textColor);
+                    }
+                });
+                valueAnimator.start();
+            }
+        }, 250);
+
     }
 
     public interface OnClickItemListener {
