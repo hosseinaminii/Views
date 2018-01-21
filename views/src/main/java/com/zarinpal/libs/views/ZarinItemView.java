@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -126,7 +127,7 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
         this.imgIconLeft.setImageResource(value);
     }
 
-    public void setIconBg(@DrawableRes int value) {
+    public void setIconBg(int value) {
         if (this.layoutIconRight == null) {
             return;
         }
@@ -134,6 +135,16 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
             return;
         }
         this.layoutIconRight.setBackgroundResource(value);
+    }
+
+    public void setIconBg(ShapeDrawable shapeDrawable) {
+        if (this.layoutIconRight == null) {
+            return;
+        }
+        if (shapeDrawable == null) {
+            return;
+        }
+        this.layoutIconRight.setBackground(shapeDrawable);
     }
 
     public void setTitle(String value) {

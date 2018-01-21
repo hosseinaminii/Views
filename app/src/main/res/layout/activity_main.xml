@@ -62,7 +62,7 @@
         android:layout_height="70dp"
         android:textColor="#707070"
         android:textSize="12sp"
-        app:zp_hasActive="false"
+        app:zp_hasActive="true"
         app:zp_iconLeft="@drawable/ic_arrow"
         app:zp_iconRight="@drawable/zarin_tiny"
         app:zp_paddingIconRight="10dp"
