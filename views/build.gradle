@@ -81,6 +81,7 @@ dependencies {
 
     implementation 'com.android.support:appcompat-v7:27.0.2'
     compile 'com.android.support:design:27.0.2'
+    compile 'com.android.support:cardview-v7:27.0.2'
     testImplementation 'junit:junit:4.12'
     compile 'me.zhanghai.android.materialedittext:library:1.0.5'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
