@@ -5,4 +5,6 @@
     <color name="button_press">#31000000</color>
     <color name="edit_text_active">#ffb932</color>
     <color name="color_pan_number">#363636</color>
+
+    <color name="pin_normal">#6B767E</color>
 </resources>

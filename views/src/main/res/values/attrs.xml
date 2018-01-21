@@ -86,5 +86,23 @@
         <attr name="zp_resource" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="ZarinPinView">
+        <attr name="zp_pinAnimationType" format="enum">
+            <enum name="popIn" value="0" />
+            <enum name="fromBottom" value="1" />
+            <enum name="none" value="-1" />
+        </attr>
+        <attr name="zp_pinCharacterMask" format="string" />
+        <attr name="zp_pinRepeatedHint" format="string" />
+        <attr name="zp_pinLineStroke" format="dimension" />
+        <attr name="zp_pinLineStrokeSelected" format="dimension" />
+        <attr name="zp_pinCharacterSpacing" format="dimension" />
+        <attr name="zp_pinTextBottomPadding" format="dimension" />
+        <attr name="zp_pinLineColors" format="color" />
+        <attr name="zp_pinBackgroundDrawable" format="reference" />
+        <attr name="zp_pinBackgroundIsSquare" format="boolean" />
+        <attr name="zp_activeColor"/>
+        <attr name="zp_fontFace" />
+    </declare-styleable>
 
 </resources>
