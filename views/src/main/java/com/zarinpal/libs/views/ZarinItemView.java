@@ -192,15 +192,12 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
         this.imgIconLeft.setTintColor(color);
     }
 
-    @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
         cardView.setEnabled(enabled);
         if (!enabled) {
             this.setViewDisableColor();
-            return;
         }
-        this.updateView();
     }
 
     private void setViewDisableColor() {
@@ -228,6 +225,10 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
         this.setTitle(this.title);
         this.setTextSize(this.textSize);
         this.setFontFace();
+
+        if (!this.cardView.isEnabled() || !this.hasActive) {
+            this.setViewDisableColor();
+        }
 
 
     }
@@ -263,33 +264,40 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
         this.txtTitle.setTypeface(FontUtility.getFont(getContext(), fontFamily));
     }
 
-    public void setAnimationColorsItem(final int[] colors, final int lastColor) {
+    private int color;
 
-        if (!cardView.isEnabled()) {
-            setViewDisableColor();
-            return;
-        }
+    public void setAnimationColorsItem(final int[] colors) {
 
         final ShapeDrawable oval = new ShapeDrawable(new OvalShape());
         oval.setIntrinsicHeight(200);
         oval.setIntrinsicWidth(200);
         oval.setAlpha(30);
 
+        if (imgIconRight.getTintColor() == 0) {
+            color = colors[0];
+        } else {
+            color = colors[1];
+        }
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                ValueAnimator valueAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), lastColor, colors[1]);
+                ValueAnimator valueAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), color, colors[0]);
                 valueAnimator.setDuration(500);
                 valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        int color = (int) valueAnimator.getAnimatedValue();
+                        if (!cardView.isEnabled()) {
+                            setViewDisableColor();
+                            return;
+                        }
 
-                        oval.getPaint().setColor((int) valueAnimator.getAnimatedValue());
-                        //set background oval
-                        layoutIconRight.setBackground(oval);
-                        // set tint color icons
-                        imgIconRight.setColorFilter((int) valueAnimator.getAnimatedValue());
+                        oval.getPaint().setColor(color);
+                        setIconBg(oval);
+                        imgIconRight.setTintColor(color);
                         txtTitle.setTextColor(textColor);
+
                     }
                 });
                 valueAnimator.start();
