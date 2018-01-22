@@ -104,10 +104,14 @@ public class ZarinTextView extends android.support.v7.widget.AppCompatTextView {
         setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                TextUtility.copyTextIntoClipboard(getContext(), getText().toString(), listener);
+                copyTextIntoClipboard(listener);
                 return true;
             }
         });
+    }
+
+    public void copyTextIntoClipboard(@Nullable TextUtility.OnTextCopyListener listener) {
+        TextUtility.copyTextIntoClipboard(getContext(), getText().toString(), listener);
     }
 
     /**
