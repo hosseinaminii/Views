@@ -19,11 +19,12 @@
         app:zp_fontFace="iran_sans_light"
         app:zp_textFormat="currency" />
 
-    <com.zarinpal.libs.views.ZarinProgressViewHorizontal
+    <com.zarinpal.libs.views.ZarinTimer
         android:id="@+id/zarin_progress"
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        app:zp_time="20"/>
 
     <com.zarinpal.libs.views.ZarinButton
         android:id="@+id/btn"
@@ -68,6 +69,7 @@
         app:zp_paddingIconRight="10dp"
         app:zp_setTitle="عنوان تستی"
         app:zp_tintLeftColor="#707070" />
+
 
     <com.zarinpal.libs.views.ZarinPinView
         android:id="@+id/zarin_pin"
