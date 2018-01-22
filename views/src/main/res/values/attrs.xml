@@ -81,9 +81,9 @@
         <attr name="zp_margin_item" format="dimension" />
     </declare-styleable>
 
-    <declare-styleable name="ZarinProgressViewHorizontal">
+    <declare-styleable name="ZarinTimer">
         <attr name="zp_time" format="integer" />
-        <attr name="zp_resource" format="integer" />
+        <attr name="zp_background" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="ZarinPinView">
