@@ -8,5 +8,5 @@
 
     <color name="pin_normal">#6B767E</color>
 
-    <color name="disable_color">#8b8b8b</color>
+    <color name="disable_color">#dcafafaf</color>
 </resources>

@@ -50,6 +50,7 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
     private int     iconLeftTint;
     private int     rotateLeftIcon;
     private int     rotateRightIcon;
+    private int     disableColor;
 
     public ZarinItemView(Context context) {
         super(context);
@@ -84,6 +85,7 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
             this.hasActive = typedArray.getBoolean(R.styleable.ZarinItemView_zp_hasActive, true);
             this.rotateLeftIcon = typedArray.getInt(R.styleable.ZarinItemView_zp_rotateLeftIcon, 0);
             this.rotateRightIcon = typedArray.getInt(R.styleable.ZarinItemView_zp_rotateRightIcon, 0);
+            this.disableColor = typedArray.getColor(R.styleable.ZarinItemView_zp_disableColor, ContextCompat.getColor(getContext(), R.color.disable_color));
         } finally {
             typedArray.recycle();
         }
@@ -97,6 +99,7 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
         this.imgIconRight = view.findViewById(R.id.img_icon_right);
         this.txtTitle = view.findViewById(R.id.txt_title);
         this.cardView.setOnClickListener(this);
+        this.setEnabled(this.hasActive);
         this.updateView();
 
     }
@@ -193,7 +196,7 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
         cardView.setEnabled(enabled);
-        if (enabled) {
+        if (!enabled) {
             this.setViewDisableColor();
             return;
         }
@@ -201,9 +204,11 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
     }
 
     private void setViewDisableColor() {
+
         this.layoutIconRight.setBackground(null);
-        this.imgIconRight.setTintColor(ContextCompat.getColor(getContext(), R.color.disable_color));
-        this.txtTitle.setTextColor(ContextCompat.getColor(getContext(), R.color.disable_color));
+        this.imgIconRight.setTintColor(this.disableColor);
+        this.imgIconLeft.setTintColor(this.disableColor);
+        this.txtTitle.setTextColor(this.disableColor);
     }
 
     private void updateView() {
@@ -223,7 +228,6 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
         this.setTitle(this.title);
         this.setTextSize(this.textSize);
         this.setFontFace();
-        this.setEnabled(this.hasActive);
 
 
     }

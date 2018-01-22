@@ -121,6 +121,7 @@
         <attr name="zp_tintLeftColor" format="color" />
         <attr name="zp_tintRightColor" format="color" />
         <attr name="zp_hasActive" format="boolean" />
+        <attr name="zp_disableColor" format="color" />
 
     </declare-styleable>
 

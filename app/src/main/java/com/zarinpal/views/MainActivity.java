@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         ZarinItemView item = findViewById(R.id.item);
         item.setIconBg(oval);
+        item.setEnabled(false);
         item.setListener(new ZarinItemView.OnClickItemListener() {
             @Override
             public void onClickItem() {

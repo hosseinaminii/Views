@@ -16,7 +16,7 @@
         android:foreground="?attr/selectableItemBackground"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="3dp"
-        app:cardElevation="3dp">
+        app:cardElevation="2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,8 +28,8 @@
 
             <com.zarinpal.libs.views.ZarinImageView
                 android:id="@+id/img_icon_left"
-                android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
 
             <com.zarinpal.libs.views.ZarinTextView
                 android:id="@+id/txt_title"
@@ -41,8 +41,8 @@
 
             <LinearLayout
                 android:id="@+id/layout_icon_right"
-                android:layout_width="50dp"
-                android:layout_height="50dp">
+                android:layout_width="40dp"
+                android:layout_height="40dp">
 
                 <com.zarinpal.libs.views.ZarinImageView
                     android:id="@+id/img_icon_right"
