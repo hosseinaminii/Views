@@ -5,6 +5,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -33,6 +34,7 @@ public class ZarinImageView extends android.support.v7.widget.AppCompatImageView
     private Context context;
     private boolean isBlur;
     private boolean isGradient;
+    private int     tintColor;
 
     public ZarinImageView(Context context) {
         super(context);
@@ -71,7 +73,12 @@ public class ZarinImageView extends android.support.v7.widget.AppCompatImageView
     }
 
     public void setTintColor(int color) {
+        this.tintColor = color;
         this.setColorFilter(color);
+    }
+
+    public int getTintColor() {
+        return tintColor;
     }
 
     public void isBlur(boolean isBlur) {
@@ -149,13 +156,13 @@ public class ZarinImageView extends android.support.v7.widget.AppCompatImageView
 //            return;
 //        }
 
-        int width = bitmap.getWidth();
+        int width  = bitmap.getWidth();
         int height = bitmap.getHeight();
 
         int bottomCenterColor = bitmap.getPixel(width / 2, height - 1);
-        int topLeftColor = bitmap.getPixel(0, 0);
-        int topRightColor = bitmap.getPixel(width - 1, 0);
-        int centerColor = bitmap.getPixel(width / 2, height / 2);
+        int topLeftColor      = bitmap.getPixel(0, 0);
+        int topRightColor     = bitmap.getPixel(width - 1, 0);
+        int centerColor       = bitmap.getPixel(width / 2, height / 2);
 
         ValueAnimator animator = ValueAnimator.ofObject(new ArgbEvaluator(), bottomCenterColor,
                 topLeftColor, centerColor, topRightColor);
@@ -168,7 +175,7 @@ public class ZarinImageView extends android.support.v7.widget.AppCompatImageView
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 GradientDrawable gradient = new GradientDrawable(
                         GradientDrawable.Orientation.TOP_BOTTOM, new int[]{(
-                        int)valueAnimator.getAnimatedValue(), Color.WHITE, Color.WHITE, Color.WHITE}
+                        int) valueAnimator.getAnimatedValue(), Color.WHITE, Color.WHITE, Color.WHITE}
                 );
 
                 gradient.setCornerRadius(0);

@@ -16,7 +16,6 @@
         android:layout_height="wrap_content"
         android:text="1000"
         android:textSize="30dp"
-
         app:zp_fontFace="iran_sans_light"
         app:zp_textFormat="currency" />
 
@@ -57,6 +56,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <com.zarinpal.libs.views.ZarinItemView
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textColor="#707070"
+        android:textSize="12sp"
+        app:zp_hasActive="false"
+        app:zp_iconLeft="@drawable/ic_arrow"
+        app:zp_iconRight="@drawable/zarin_tiny"
+        app:zp_paddingIconRight="10dp"
+        app:zp_setTitle="عنوان تستی"
+        app:zp_tintLeftColor="#707070" />
+
     <com.zarinpal.libs.views.ZarinPinView
         android:id="@+id/zarin_pin"
         android:layout_width="250dp"
@@ -86,7 +98,6 @@
         app:zp_marginItem="5dp"
         app:zp_pinCount="6"
         app:zp_widthItem="20dp" />
-
 
     <com.zarinpal.libs.views.ZarinPanTextView
         android:layout_width="match_parent"

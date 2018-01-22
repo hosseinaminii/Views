@@ -101,8 +101,28 @@
         <attr name="zp_pinLineColors" format="color" />
         <attr name="zp_pinBackgroundDrawable" format="reference" />
         <attr name="zp_pinBackgroundIsSquare" format="boolean" />
-        <attr name="zp_activeColor"/>
+        <attr name="zp_activeColor" />
         <attr name="zp_fontFace" />
+    </declare-styleable>
+
+    <declare-styleable name="ZarinItemView">
+        <attr name="zp_rotateLeftIcon" format="integer" />
+        <attr name="zp_rotateRightIcon" format="integer" />
+        <attr name="zp_bgColor" format="color" />
+        <attr name="android:textColor" />
+        <attr name="zp_titleSize" format="dimension" />
+        <attr name="zp_fontFace" />
+        <attr name="zp_iconRight" format="reference" />
+        <attr name="zp_iconLeft" format="reference" />
+        <attr name="zp_bgIconRight" format="integer" />
+        <attr name="zp_setTitle" format="string" />
+        <attr name="zp_paddingIconRight" format="dimension" />
+        <attr name="zp_paddingIconLeft" format="dimension" />
+        <attr name="zp_tintLeftColor" format="color" />
+        <attr name="zp_tintRightColor" format="color" />
+        <attr name="zp_hasActive" format="boolean" />
+        <attr name="zp_disableColor" format="color" />
+
     </declare-styleable>
 
 </resources>
