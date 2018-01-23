@@ -27,13 +27,13 @@ import com.zarinpal.libs.views.utitlity.FontUtility;
  * Item View Created by farshid roohi on 1/21/18.
  */
 
-public class ZarinItemView extends LinearLayout implements View.OnClickListener {
+public class ZarinItemView extends LinearLayout {
 
     private ZarinImageView imgIconRight, imgIconLeft;
-    private ZarinTextView       txtTitle;
-    private LinearLayout        layoutIconRight;
-    private CardView            cardView;
-    private OnClickItemListener listener;
+    private ZarinTextView   txtTitle;
+    private LinearLayout    layoutIconRight;
+    private CardView        cardView;
+    private OnClickListener listener;
 
     private Integer iconRightPadding;
     private Integer iconLeftPadding;
@@ -98,7 +98,14 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
         this.imgIconLeft = view.findViewById(R.id.img_icon_left);
         this.imgIconRight = view.findViewById(R.id.img_icon_right);
         this.txtTitle = view.findViewById(R.id.txt_title);
-        this.cardView.setOnClickListener(this);
+        this.cardView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onClick(view);
+                }
+            }
+        });
         this.setEnabled(this.hasActive);
         this.updateView();
 
@@ -159,7 +166,7 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
         this.txtTitle.setTextSize(value);
     }
 
-    public void setListener(OnClickItemListener listener) {
+    public void setOnClickListener(OnClickListener listener) {
         if (listener == null) {
             return;
         }
@@ -233,13 +240,6 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
 
     }
 
-    @Override
-    public void onClick(View view) {
-        if (this.listener != null) {
-            this.listener.onClickItem();
-        }
-    }
-
     /**
      * Change font
      */
@@ -305,9 +305,4 @@ public class ZarinItemView extends LinearLayout implements View.OnClickListener 
         }, 250);
 
     }
-
-    public interface OnClickItemListener {
-        void onClickItem();
-    }
-
 }
