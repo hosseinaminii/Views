@@ -4,10 +4,7 @@ package com.zarinpal.views;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
-import com.zarinpal.libs.views.ZarinButton;
-import com.zarinpal.libs.views.ZarinItemView;
 import com.zarinpal.libs.views.ZarinTimer;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, time);
             }
         });
-        
         timer.setOnTimeCompleteListener(new ZarinTimer.OnTimeCompleteListener() {
             @Override
             public void onTimeComplete() {
