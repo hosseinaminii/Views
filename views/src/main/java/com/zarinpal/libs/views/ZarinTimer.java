@@ -21,10 +21,10 @@ public class ZarinTimer extends LinearLayout {
     public static final String TAG = ZarinTimer.class.getSimpleName();
 
     private OnTimeCompleteListener timeCompleteListener;
-    private ProgressBar progressView;
-    private int time;
-    private int counter;
-    private Drawable drawable;
+    private ProgressBar            progressView;
+    private int                    time;
+    private int                    counter;
+    private Drawable               drawable;
 
     public ZarinTimer(Context context) {
         super(context);
@@ -98,8 +98,13 @@ public class ZarinTimer extends LinearLayout {
                         Thread.sleep(100);
                     }
 
-                    if(timeCompleteListener != null) {
-                        timeCompleteListener.onTimeComplete();
+                    if (timeCompleteListener != null) {
+                        progressView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                timeCompleteListener.onTimeComplete();
+                            }
+                        });
                     }
 
                 } catch (InterruptedException e) {
@@ -118,7 +123,7 @@ public class ZarinTimer extends LinearLayout {
         String secondsString;
 
         // Convert total duration into time
-        int hours = (int) (milliseconds / (1000 * 60 * 60));
+        int hours   = (int) (milliseconds / (1000 * 60 * 60));
         int minutes = (int) (milliseconds % (1000 * 60 * 60)) / (1000 * 60);
         int seconds = (int) ((milliseconds % (1000 * 60 * 60)) % (1000 * 60) / 1000);
 
