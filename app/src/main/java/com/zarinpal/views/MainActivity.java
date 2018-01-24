@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.zarinpal.libs.views.ZarinButton;
 import com.zarinpal.libs.views.ZarinItemView;
+import com.zarinpal.libs.views.ZarinTimer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,20 +19,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ZarinButton btn = findViewById(R.id.btn);
-
-        btn.setBackgroundColors(getResources().getColor(R.color.colorPrimary),
-                getResources().getColor(R.color.colorAccent));
+        ZarinTimer timer = findViewById(R.id.timer);
         
-       ZarinItemView itemView =  findViewById(R.id.item);
-        itemView.setEnabled(true);
-       itemView.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               Log.i(TAG, "onClick: ");
-           }
-       });
-
+        timer.startTimer(new ZarinTimer.OnTimerListener() {
+            @Override
+            public void onTime(String time) {
+                Log.d(TAG, time);
+            }
+        });
+        
+        timer.setOnTimeCompleteListener(new ZarinTimer.OnTimeCompleteListener() {
+            @Override
+            public void onTimeComplete() {
+                Log.d(TAG, "onTimeComplete: ");
+            }
+        });
+        
+        
     }
 
 }

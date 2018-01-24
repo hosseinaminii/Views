@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -19,10 +20,11 @@ public class ZarinTimer extends LinearLayout {
 
     public static final String TAG = ZarinTimer.class.getSimpleName();
 
+    private OnTimeCompleteListener timeCompleteListener;
     private ProgressBar progressView;
-    private int         time;
-    private int         counter;
-    private Drawable    drawable;
+    private int time;
+    private int counter;
+    private Drawable drawable;
 
     public ZarinTimer(Context context) {
         super(context);
@@ -61,6 +63,10 @@ public class ZarinTimer extends LinearLayout {
         this.time = timeSec;
     }
 
+    public void setOnTimeCompleteListener(OnTimeCompleteListener listener) {
+        this.timeCompleteListener = listener;
+    }
+
     int millTime = 0;
 
     public void startTimer(final OnTimerListener listener) {
@@ -85,12 +91,15 @@ public class ZarinTimer extends LinearLayout {
                                     counter = counter + 100;
                                     time = ((time - 100));
                                     listener.onTime(formatsMilliSeconds((time * -1)));
-
                                 }
 
                             }
                         });
                         Thread.sleep(100);
+                    }
+
+                    if(timeCompleteListener != null) {
+                        timeCompleteListener.onTimeComplete();
                     }
 
                 } catch (InterruptedException e) {
@@ -109,7 +118,7 @@ public class ZarinTimer extends LinearLayout {
         String secondsString;
 
         // Convert total duration into time
-        int hours   = (int) (milliseconds / (1000 * 60 * 60));
+        int hours = (int) (milliseconds / (1000 * 60 * 60));
         int minutes = (int) (milliseconds % (1000 * 60 * 60)) / (1000 * 60);
         int seconds = (int) ((milliseconds % (1000 * 60 * 60)) % (1000 * 60) / 1000);
 
@@ -133,6 +142,10 @@ public class ZarinTimer extends LinearLayout {
 
     public interface OnTimerListener {
         void onTime(String time);
+    }
+
+    public interface OnTimeCompleteListener {
+        void onTimeComplete();
     }
 
 }
