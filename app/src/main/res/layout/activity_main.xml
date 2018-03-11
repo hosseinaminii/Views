@@ -9,122 +9,86 @@
     android:padding="20dp"
     tools:context="com.zarinpal.views.MainActivity">
 
+    <com.zarinpal.libs.views.ZarinTextView
+        android:id="@+id/txt_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100000"
+        android:textSize="30dp"
+        app:zp_fontFace="iran_sans_light"
+        app:zp_textFormat="currency" />
 
-    <!--<com.zarinpal.libs.views.ZarinTextView-->
-    <!--android:id="@+id/txt_test"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="1000"-->
-    <!--android:textSize="30dp"-->
-    <!--app:zp_fontFace="iran_sans_light"-->
-    <!--app:zp_textFormat="currency" />-->
+    <com.zarinpal.libs.views.ZarinTimer
+        android:id="@+id/zarin_progress"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginBottom="10dp"
+        app:zp_time="20" />
 
-    <!--<com.zarinpal.libs.views.ZarinTimer-->
-    <!--android:id="@+id/zarin_progress"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="5dp"-->
-    <!--android:layout_marginBottom="10dp"-->
-    <!--app:zp_time="20"/>-->
+    <com.zarinpal.libs.views.ZarinButton
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:padding="10dp"
+        android:text="Click button"
+        android:textColor="#efefef"
+        app:zp_cornerRadius="20"
+        app:zp_firstColor="#16a085"
+        app:zp_fontFace="iransans_bold"
+        app:zp_pressColor="#1abc9c"
+        app:zp_rippleColor="#3498db" />
 
-    <!--<com.zarinpal.libs.views.ZarinButton-->
-    <!--android:id="@+id/btn"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="20dp"-->
-    <!--android:padding="10dp"-->
-    <!--android:text="This Button"-->
-    <!--app:zp_cornerRadius="20"-->
-    <!--app:zp_firstColor="@color/colorAccent"-->
-    <!--app:zp_fontFace="iransans_bold"-->
-    <!--app:zp_pressColor="#0f0"-->
-    <!--app:zp_rippleColor="#ff0" />-->
+    <com.zarinpal.libs.views.ZarinEditText
+        android:id="@+id/edt_zarin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:maxLines="1"
+        app:zp_is_arrow_visible="true"
+        app:zp_type="pan" />
 
-    <!--<com.zarinpal.libs.views.ZarinEditText-->
-    <!--android:id="@+id/edt_zarin"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:gravity="right"-->
-    <!--android:maxLines="1"-->
-    <!--app:zp_is_arrow_visible="true"-->
-    <!--app:zp_type="pan" />-->
-
-    <!--<EditText-->
-    <!--android:id="@+id/edt"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content" />-->
-
-    <!--<Button-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content" />-->
-
-    <!--<com.zarinpal.libs.views.ZarinItemView-->
-    <!--android:id="@+id/item"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="70dp"-->
-    <!--android:textColor="#707070"-->
-    <!--android:textSize="12sp"-->
-    <!--app:zp_hasActive="false"-->
-    <!--app:zp_iconLeft="@drawable/ic_arrow"-->
-    <!--app:zp_iconRight="@drawable/zarin_tiny"-->
-    <!--app:zp_paddingIconRight="10dp"-->
-    <!--app:zp_setTitle="عنوان تستی"-->
-    <!--app:zp_tintLeftColor="#707070" />-->
+    <com.zarinpal.libs.views.ZarinItemView
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textColor="#707070"
+        android:textSize="12sp"
+        app:zp_hasActive="true"
+        app:zp_iconLeft="@drawable/ic_arrow"
+        app:zp_iconRight="@drawable/zarin_tiny"
+        app:zp_paddingIconRight="10dp"
+        app:zp_setTitle="عنوان تستی"
+        app:zp_tintLeftColor="#707070" />
 
 
-    <!--<com.zarinpal.libs.views.ZarinPinView-->
-    <!--android:id="@+id/zarin_pin"-->
-    <!--android:layout_width="250dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="@null"-->
-    <!--android:cursorVisible="false"-->
-    <!--android:digits="1234567890"-->
-    <!--android:inputType="number"-->
-    <!--android:maxLength="6"-->
-    <!--android:textIsSelectable="false"-->
-    <!--android:textSize="16sp"-->
-    <!--app:zp_activeColor="@color/normal"-->
-    <!--app:zp_pinBackgroundIsSquare="true"-->
-    <!--app:zp_pinLineStroke="2dp">-->
+    <com.zarinpal.libs.views.ZarinPinView
+        android:id="@+id/zarin_pin"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:cursorVisible="false"
+        android:digits="1234567890"
+        android:inputType="number"
+        android:maxLength="6"
+        android:textIsSelectable="false"
+        android:textSize="16sp"
+        app:zp_activeColor="@color/normal"
+        app:zp_pinBackgroundIsSquare="true"
+        app:zp_pinLineStroke="2dp">
 
-    <!--</com.zarinpal.libs.views.ZarinPinView>-->
+    </com.zarinpal.libs.views.ZarinPinView>
 
-    <!--<com.zarinpal.libs.views.SectionEditText-->
-    <!--android:id="@+id/edt_password"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="20dp"-->
-    <!--android:inputType="numberPassword"-->
-    <!--android:maxLength="1"-->
-    <!--android:textColor="#484848"-->
-    <!--app:zp_heightItem="30dp"-->
-    <!--app:zp_marginItem="5dp"-->
-    <!--app:zp_pinCount="6"-->
-    <!--app:zp_widthItem="20dp" />-->
-
-    <!--<com.zarinpal.libs.views.ZarinPanTextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:gravity="center"-->
-    <!--android:padding="10dp"-->
-    <!--android:textColor="#484848"-->
-    <!--app:zp_fontFace="iransans_bold"-->
-    <!--app:zp_margin_item="5dp"-->
-    <!--app:zp_setCardNumber="639607******2706"-->
-    <!--app:zp_textSize="13sp" />-->
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/test"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="?attr/selectableItemBackground"-->
-    <!--android:clickable="true">-->
-
-    <!--<com.zarinpal.libs.views.ZarinTextView-->
-        <!--android:id="@+id/txt_title"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="HelOOoooOOOOo" />-->
-    <!--</LinearLayout>-->
+    <com.zarinpal.libs.views.ZarinPanTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="#484848"
+        app:zp_fontFace="iransans_bold"
+        app:zp_margin_item="5dp"
+        app:zp_setCardNumber="639607******2706"
+        app:zp_textSize="13sp" />
 
     <com.zarinpal.libs.views.ZarinTimer
         android:id="@+id/timer"
