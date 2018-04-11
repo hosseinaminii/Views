@@ -1,4 +1,4 @@
-# Custom Toast
+# Custom Views library
 
 ![API](https://img.shields.io/badge/API-14%2B-blue.svg?style=flat)
 - Add library gradle : 
