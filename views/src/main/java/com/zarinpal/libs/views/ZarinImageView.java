@@ -19,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.zarinpal.libs.views.utitlity.DrawableResource;
@@ -109,7 +110,28 @@ public class ZarinImageView extends android.support.v7.widget.AppCompatImageView
         return 0;
     }
 
+    public void loadImageUrl(String url) {
+        Picasso.with(getContext()).load(url).into(this, new Callback() {
+            @Override
+            public void onSuccess() {
+
+                if (listener != null) {
+                    listener.onLoadedImageSuccess();
+                }
+            }
+
+            @Override
+            public void onError() {
+
+                if (listener != null) {
+                    listener.onLoadedImageFaild();
+                }
+            }
+        });
+    }
+
     public void loadAsyncBitmap(final String url) {
+
 
         Picasso.with(getContext()).load(url).into(new Target() {
             @Override
@@ -129,27 +151,16 @@ public class ZarinImageView extends android.support.v7.widget.AppCompatImageView
 
                 ZarinImageView.this.setImageBitmap(bitmap);
 
-                if (listener != null) {
-                    listener.onLoadedImageSuccess();
-                }
-
 
             }
 
             @Override
             public void onBitmapFailed(Drawable errorDrawable) {
                 loadAsyncBitmap(url);
-                if (listener != null) {
-                    listener.onLoadedImageFaild();
-                }
-
             }
 
             @Override
             public void onPrepareLoad(Drawable placeHolderDrawable) {
-                if (listener != null) {
-                    listener.onLoadedImageFaild();
-                }
             }
         });
     }
