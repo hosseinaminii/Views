@@ -9,6 +9,18 @@
     android:padding="20dp"
     tools:context="com.zarinpal.views.MainActivity">
 
+    <com.zarinpal.libs.views.ZarinCircularImageView
+        android:id="@+id/img_dialog"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        app:civ_border="true"
+        app:civ_border_color="@android:color/white"
+        app:civ_border_width="2dp"
+        app:civ_shadow="true"
+        app:civ_shadow_color="#484848"
+        app:civ_shadow_radius="3" />
+
     <com.zarinpal.libs.views.ZarinTextView
         android:id="@+id/txt_test"
         android:layout_width="wrap_content"
