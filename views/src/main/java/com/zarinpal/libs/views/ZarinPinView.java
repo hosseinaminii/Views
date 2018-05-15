@@ -3,7 +3,6 @@ package com.zarinpal.libs.views;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -13,10 +12,11 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.text.TextUtilsCompat;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.AppCompatEditText;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -27,8 +27,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
+import android.view.autofill.AutofillValue;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 
 import com.zarinpal.libs.views.utitlity.FontUtility;
 
@@ -38,7 +40,7 @@ import java.util.Locale;
  * Pin Edit Text Created by farshid roohi on 1/20/18.
  */
 
-public class ZarinPinView extends EditText {
+public class ZarinPinView extends AppCompatEditText {
 
     private static final String XML_NAMESPACE_ANDROID = "http://schemas.android.com/apk/res/android";
 
@@ -101,11 +103,11 @@ public class ZarinPinView extends EditText {
         init(context, attrs);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public ZarinPinView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(context, attrs);
-    }
+//    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+//    public ZarinPinView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+//        super(context, attrs, defStyleAttr, defStyleRes);
+//        init(context, attrs);
+//    }
 
     public void setMaxLength(final int maxLength) {
         mMaxLength = maxLength;
@@ -410,7 +412,9 @@ public class ZarinPinView extends EditText {
         // Show keyboard
         InputMethodManager inputMethodManager = (InputMethodManager) getContext()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.showSoftInput(this, 0);
+        if (inputMethodManager != null) {
+            inputMethodManager.showSoftInput(this, 0);
+        }
     }
 
     @Override
@@ -547,6 +551,12 @@ public class ZarinPinView extends EditText {
         setTypeface(FontUtility.getFont(getContext(), fontFamily));
     }
 
+    @Nullable
+    @Override
+    public AutofillValue getAutofillValue() {
+        return super.getAutofillValue();
+    }
+
     public void setAnimateText(boolean animate) {
         mAnimate = animate;
     }
@@ -554,6 +564,8 @@ public class ZarinPinView extends EditText {
     public void setOnPinEnteredListener(OnPinEnteredListener l) {
         mOnPinEnteredListener = l;
     }
+
+
 
     public interface OnPinEnteredListener {
         void onPinEntered(CharSequence str);
